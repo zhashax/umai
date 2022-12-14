@@ -9,6 +9,7 @@
     <div class="col-12">
       <div class="page-header">
         <h4 class="page-title">Dashboard</h4>
+    
         <div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
           <ul class="quick-links ml-auto">
             <li><a href="#">Settings</a></li>
@@ -58,9 +59,9 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex">
                             <div class="wrapper">
-                                <h3 class="mb-0 font-weight-semibold">32,451</h3>
+                                <h3 class="mb-0 font-weight-semibold">{{count($user);}}</h3>
                                 <h5 class="mb-0 font-weight-medium text-primary">Visits</h5>
-                                <p class="mb-0 text-muted">+14.00(+0.50%)</p>
+                                
                             </div>
                             <div class="wrapper my-auto ml-auto ml-lg-4">
                                 <canvas height="50" width="100" id="stats-line-graph-1"></canvas>
@@ -84,7 +85,7 @@
                             <div class="wrapper">
                                 <h3 class="mb-0 font-weight-semibold">7,688</h3>
                                 <h5 class="mb-0 font-weight-medium text-primary">Conversation</h5>
-                                <p class="mb-0 text-muted">+57.62(+0.76%)</p>
+                            
                             </div>
                             <div class="wrapper my-auto ml-auto ml-lg-4">
                                 <canvas height="50" width="100" id="stats-line-graph-3"></canvas>

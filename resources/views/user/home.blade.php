@@ -24,8 +24,13 @@
                 </div>
                 <div class="card-body">
                     <div class="panel-body">
-                      Check admin view:
-                      <a href="{{route('admin.view')}}">Admin View</a>
+                        <p>visitors: {{count($user)}}</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="panel-body">
+                    
+                      <a href="{{route('user.students')}}">ученики</a>
                     </div>
                 </div>
             </div>
