@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -29,9 +29,9 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-      if (auth()->user()->user_type == 'Administrator')
+      if (Auth::user()->is_admin)
       {
-        return 'admin';  // admin dashboard path
+        return 'dashboard';  // admin dashboard path
       } else {
         return 'home';  // member dashboard path
       }
