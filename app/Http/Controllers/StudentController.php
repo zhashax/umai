@@ -16,14 +16,14 @@ class StudentController extends Controller
         $student->fullname=$request->fullname;
         $student->address=$request->address;
         $student->email=$request->email;
-        $student->sex=$request()->sex;
-        $student->mobile=$request()->mobile;
-        $student->class=$request()->class;
-        $student->school_name=$request()->school_name;
-        $student->discounts=$request()->discounts;
-        $student->comment=$request()->comment;
+        $student->sex=$request->sex;
+        $student->mobile=$request->mobile;
+        $student->class=$request->class;
+        $student->school_name=$request->school_name;
+        $student->discounts=$request->discounts;
+        $student->comment=$request->comment;
         $student->save();
-        return redirect()->route('user.students')->with('status','Студент успешно добавлен!');
+        return redirect()->route('user.home')->with('status','Студент успешно добавлен!');
 
     }
 }
