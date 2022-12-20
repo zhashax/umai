@@ -44,7 +44,7 @@
             LLL : 'D [de] MMMM [de] YYYY h:mm A',
             LLLL : 'dddd, D [de] MMMM [de] YYYY h:mm A'
         },
-        calendar : {
+        Calendar : {
             sameDay : function () {
                 return '[hoy a la' + ((this.hours() !== 1) ? 's' : '') + '] LT';
             },

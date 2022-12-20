@@ -46,7 +46,7 @@
                 return 'malam';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Hari ini pukul] LT',
             nextDay : '[Esok pukul] LT',
             nextWeek : 'dddd [pukul] LT',

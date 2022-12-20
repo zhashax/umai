@@ -35,7 +35,7 @@
                 return 'หลังเที่ยง';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[วันนี้ เวลา] LT',
             nextDay : '[พรุ่งนี้ เวลา] LT',
             nextWeek : 'dddd[หน้า เวลา] LT',

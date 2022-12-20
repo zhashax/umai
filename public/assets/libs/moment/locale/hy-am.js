@@ -25,7 +25,7 @@
             LLL : 'D MMMM YYYY թ., HH:mm',
             LLLL : 'dddd, D MMMM YYYY թ., HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[այսօր] LT',
             nextDay: '[վաղը] LT',
             lastDay: '[երեկ] LT',

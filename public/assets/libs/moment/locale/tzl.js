@@ -35,7 +35,7 @@
                 return isLower ? 'd\'a' : 'D\'A';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[oxhi à] LT',
             nextDay : '[demà à] LT',
             nextWeek : 'dddd [à] LT',

@@ -48,7 +48,7 @@
             LLL: 'D MMMM YYYY, A h:mm વાગ્યે',
             LLLL: 'dddd, D MMMM YYYY, A h:mm વાગ્યે'
         },
-        calendar: {
+        Calendar: {
             sameDay: '[આજ] LT',
             nextDay: '[કાલે] LT',
             nextWeek: 'dddd, LT',

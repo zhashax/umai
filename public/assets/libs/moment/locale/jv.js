@@ -46,7 +46,7 @@
                 return 'ndalu';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Dinten puniko pukul] LT',
             nextDay : '[Mbenjang pukul] LT',
             nextWeek : 'dddd [pukul] LT',

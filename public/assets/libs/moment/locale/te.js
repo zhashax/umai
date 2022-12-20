@@ -23,7 +23,7 @@
             LLL : 'D MMMM YYYY, A h:mm',
             LLLL : 'dddd, D MMMM YYYY, A h:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[నేడు] LT',
             nextDay : '[రేపు] LT',
             nextWeek : 'dddd, LT',

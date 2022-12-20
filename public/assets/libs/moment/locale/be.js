@@ -53,7 +53,7 @@
             LLL : 'D MMMM YYYY г., HH:mm',
             LLLL : 'dddd, D MMMM YYYY г., HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[Сёння ў] LT',
             nextDay: '[Заўтра ў] LT',
             lastDay: '[Учора ў] LT',

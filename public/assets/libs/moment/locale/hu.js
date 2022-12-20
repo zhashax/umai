@@ -68,7 +68,7 @@
                 return isLower === true ? 'du' : 'DU';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[ma] LT[-kor]',
             nextDay : '[holnap] LT[-kor]',
             nextWeek : function () {

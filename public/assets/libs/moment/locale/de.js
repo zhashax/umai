@@ -38,7 +38,7 @@
             LLL : 'D. MMMM YYYY HH:mm',
             LLLL : 'dddd, D. MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[heute um] LT [Uhr]',
             sameElse: 'L',
             nextDay: '[morgen um] LT [Uhr]',

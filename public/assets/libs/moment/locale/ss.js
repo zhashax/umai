@@ -23,7 +23,7 @@
             LLL : 'D MMMM YYYY h:mm A',
             LLLL : 'dddd, D MMMM YYYY h:mm A'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Namuhla nga] LT',
             nextDay : '[Kusasa nga] LT',
             nextWeek : 'dddd [nga] LT',

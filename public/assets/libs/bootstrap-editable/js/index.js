@@ -4982,7 +4982,7 @@ Editableform based on Twitter Bootstrap 3
 
 		this.viewMode = this.o.startView;
 
-		if (this.o.calendarWeeks)
+		if (this.o.CalendarWeeks)
 			this.picker.find('tfoot th.today')
 						.attr('colspan', function(i, val){
 							return parseInt(val) + 1;
@@ -5312,7 +5312,7 @@ Editableform based on Twitter Bootstrap 3
 		fillDow: function(){
 			var dowCnt = this.o.weekStart,
 			html = '<tr>';
-			if(this.o.calendarWeeks){
+			if(this.o.CalendarWeeks){
 				var cell = '<th class="cw">&nbsp;</th>';
 				html += cell;
 				this.picker.find('.datepicker-days thead tr:first-child').prepend(cell);
@@ -5409,7 +5409,7 @@ Editableform based on Twitter Bootstrap 3
 			while(prevMonth.valueOf() < nextMonth) {
 				if (prevMonth.getUTCDay() == this.o.weekStart) {
 					html.push('<tr>');
-					if(this.o.calendarWeeks){
+					if(this.o.CalendarWeeks){
 						// ISO 8601: First week contains first thursday.
 						// ISO also states week starts on Monday, but we can be more abstract here.
 						var
@@ -5919,7 +5919,7 @@ Editableform based on Twitter Bootstrap 3
 	var defaults = $.fn.datepicker.defaults = {
 		autoclose: false,
 		beforeShowDay: $.noop,
-		calendarWeeks: false,
+		CalendarWeeks: false,
 		clearBtn: false,
 		daysOfWeekDisabled: [],
 		endDate: Infinity,

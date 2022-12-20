@@ -87,7 +87,7 @@
                 return 'राति';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[आज] LT',
             nextDay : '[भोलि] LT',
             nextWeek : '[आउँदो] dddd[,] LT',

@@ -48,7 +48,7 @@
             LLL: 'D. MMMM YYYY H:mm',
             LLLL: 'dddd, D. MMMM YYYY H:mm'
         },
-        calendar: {
+        Calendar: {
             sameDay: '[данас у] LT',
             nextDay: '[сутра у] LT',
             nextWeek: function () {

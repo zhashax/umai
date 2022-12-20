@@ -42,7 +42,7 @@
             LLL  : 'D. MMMM YYYY H:mm',
             LLLL : 'dddd, D. MMMM YYYY H:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay  : '[Täna,] LT',
             nextDay  : '[Homme,] LT',
             nextWeek : '[Järgmine] dddd LT',

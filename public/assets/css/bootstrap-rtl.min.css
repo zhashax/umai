@@ -375,7 +375,7 @@ select:disabled {
   opacity: 1;
 }
 
-[list]::-webkit-calendar-picker-indicator {
+[list]::-webkit-Calendar-picker-indicator {
   display: none;
 }
 

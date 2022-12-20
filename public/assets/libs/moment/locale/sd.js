@@ -56,7 +56,7 @@
             }
             return 'شام';
         },
-        calendar : {
+        Calendar : {
             sameDay : '[اڄ] LT',
             nextDay : '[سڀاڻي] LT',
             nextWeek : 'dddd [اڳين هفتي تي] LT',

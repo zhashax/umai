@@ -22,7 +22,7 @@
             LLL : 'MMMM [tile] D [san] YYYY [lɛrɛ] HH:mm',
             LLLL : 'dddd MMMM [tile] D [san] YYYY [lɛrɛ] HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Bi lɛrɛ] LT',
             nextDay : '[Sini lɛrɛ] LT',
             nextWeek : 'dddd [don lɛrɛ] LT',

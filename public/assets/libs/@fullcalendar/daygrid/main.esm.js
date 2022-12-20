@@ -1,10 +1,10 @@
 /*!
 FullCalendar Day Grid Plugin v4.4.2
-Docs & License: https://fullcalendar.io/
+Docs & License: https://fullCalendar.io/
 (c) 2019 Adam Shaw
 */
 
-import { addWeeks, diffWeeks, DateProfileGenerator, createElement, listenBySelector, removeElement, computeRect, computeClippingRect, applyStyle, computeEventDraggable, computeEventStartResizable, computeEventEndResizable, cssToStr, htmlEscape, FgEventRenderer, appendToElement, prependToElement, htmlToElement, FillRenderer, memoizeRendering, createFormatter, addDays, DateComponent, rangeContainsMarker, getDayClasses, findElements, PositionCache, buildGotoAnchorHtml, findChildren, insertAfterElement, intersectRanges, memoize, ScrollComponent, matchCellWidths, uncompensateScroll, compensateScroll, subtractInnerElHeight, distributeHeight, undistributeHeight, View, Slicer, DayHeader, DaySeries, DayTable, createPlugin } from '@fullcalendar/core';
+import { addWeeks, diffWeeks, DateProfileGenerator, createElement, listenBySelector, removeElement, computeRect, computeClippingRect, applyStyle, computeEventDraggable, computeEventStartResizable, computeEventEndResizable, cssToStr, htmlEscape, FgEventRenderer, appendToElement, prependToElement, htmlToElement, FillRenderer, memoizeRendering, createFormatter, addDays, DateComponent, rangeContainsMarker, getDayClasses, findElements, PositionCache, buildGotoAnchorHtml, findChildren, insertAfterElement, intersectRanges, memoize, ScrollComponent, matchCellWidths, uncompensateScroll, compensateScroll, subtractInnerElHeight, distributeHeight, undistributeHeight, View, Slicer, DayHeader, DaySeries, DayTable, createPlugin } from '@fullCalendar/core';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -432,7 +432,7 @@ var DayGridEventRenderer = /** @class */ (function (_super) {
             ;
             (levels[j] || (levels[j] = [])).push(seg);
         }
-        // order segments left-to-right. very important if calendar is RTL
+        // order segments left-to-right. very important if Calendar is RTL
         for (j = 0; j < levels.length; j++) {
             levels[j].sort(compareDaySegCols);
         }
@@ -599,7 +599,7 @@ var DayTile = /** @class */ (function (_super) {
         return _this;
     }
     DayTile.prototype.firstContext = function (context) {
-        context.calendar.registerInteractiveComponent(this, {
+        context.Calendar.registerInteractiveComponent(this, {
             el: this.el,
             useEventCenter: false
         });
@@ -614,7 +614,7 @@ var DayTile = /** @class */ (function (_super) {
     DayTile.prototype.destroy = function () {
         _super.prototype.destroy.call(this);
         this.renderFrame.unrender(); // should unrender everything else
-        this.context.calendar.unregisterInteractiveComponent(this);
+        this.context.Calendar.unregisterInteractiveComponent(this);
     };
     DayTile.prototype._renderFrame = function (date) {
         var _a = this.context, theme = _a.theme, dateEnv = _a.dateEnv, options = _a.options;
@@ -774,7 +774,7 @@ var DayGrid = /** @class */ (function (_super) {
     /* Date Rendering
     ------------------------------------------------------------------------------------------------------------------*/
     DayGrid.prototype._renderCells = function (cells, isRigid) {
-        var _a = this.context, calendar = _a.calendar, view = _a.view, isRtl = _a.isRtl, dateEnv = _a.dateEnv;
+        var _a = this.context, Calendar = _a.Calendar, view = _a.view, isRtl = _a.isRtl, dateEnv = _a.dateEnv;
         var _b = this, rowCnt = _b.rowCnt, colCnt = _b.colCnt;
         var html = '';
         var row;
@@ -796,7 +796,7 @@ var DayGrid = /** @class */ (function (_super) {
         // trigger dayRender with each cell's element
         for (row = 0; row < rowCnt; row++) {
             for (col = 0; col < colCnt; col++) {
-                calendar.publiclyTrigger('dayRender', [
+                Calendar.publiclyTrigger('dayRender', [
                     {
                         date: dateEnv.toDate(cells[row][col].date),
                         el: this.getCellEl(row, col),
@@ -911,11 +911,11 @@ var DayGrid = /** @class */ (function (_super) {
     /* Sizing
     ------------------------------------------------------------------------------------------------------------------*/
     DayGrid.prototype.updateSize = function (isResize) {
-        var calendar = this.context.calendar;
+        var Calendar = this.context.Calendar;
         var _a = this, fillRenderer = _a.fillRenderer, eventRenderer = _a.eventRenderer, mirrorRenderer = _a.mirrorRenderer;
         if (isResize ||
             this.isCellSizesDirty ||
-            calendar.isEventsUpdated // hack
+            Calendar.isEventsUpdated // hack
         ) {
             this.buildPositionCaches();
             this.isCellSizesDirty = false;
@@ -1151,7 +1151,7 @@ var DayGrid = /** @class */ (function (_super) {
     // Responsible for attaching click handler as well.
     DayGrid.prototype.renderMoreLink = function (row, col, hiddenSegs) {
         var _this = this;
-        var _a = this.context, calendar = _a.calendar, view = _a.view, dateEnv = _a.dateEnv, options = _a.options, isRtl = _a.isRtl;
+        var _a = this.context, Calendar = _a.Calendar, view = _a.view, dateEnv = _a.dateEnv, options = _a.options, isRtl = _a.isRtl;
         var a = createElement('a', { className: 'fc-more' });
         a.innerText = this.getMoreLinkText(hiddenSegs.length);
         a.addEventListener('click', function (ev) {
@@ -1166,7 +1166,7 @@ var DayGrid = /** @class */ (function (_super) {
             var reslicedHiddenSegs = _this.resliceDaySegs(hiddenSegs, date);
             if (typeof clickOption === 'function') {
                 // the returned value can be an atomic option
-                clickOption = calendar.publiclyTrigger('eventLimitClick', [
+                clickOption = Calendar.publiclyTrigger('eventLimitClick', [
                     {
                         date: dateEnv.toDate(date),
                         allDay: true,
@@ -1183,7 +1183,7 @@ var DayGrid = /** @class */ (function (_super) {
                 _this.showSegPopover(row, col, moreEl, reslicedAllSegs);
             }
             else if (typeof clickOption === 'string') { // a view name
-                calendar.zoomTo(date, clickOption);
+                Calendar.zoomTo(date, clickOption);
             }
         });
         return a;
@@ -1191,7 +1191,7 @@ var DayGrid = /** @class */ (function (_super) {
     // Reveals the popover that displays all events within a cell
     DayGrid.prototype.showSegPopover = function (row, col, moreLink, segs) {
         var _this = this;
-        var _a = this.context, calendar = _a.calendar, view = _a.view, theme = _a.theme, isRtl = _a.isRtl;
+        var _a = this.context, Calendar = _a.Calendar, view = _a.view, theme = _a.theme, isRtl = _a.isRtl;
         var _col = isRtl ? this.colCnt - col - 1 : col; // HACK: props.cells has different dir system?
         var moreWrap = moreLink.parentNode; // the <div> wrapper around the <a>
         var topEl; // the element we want to match the top coordinate of
@@ -1228,7 +1228,7 @@ var DayGrid = /** @class */ (function (_super) {
         }
         this.segPopover = new Popover(options);
         this.segPopover.show();
-        calendar.releaseAfterSizingTriggers(); // hack for eventPositioned
+        Calendar.releaseAfterSizingTriggers(); // hack for eventPositioned
     };
     // Given the events within an array of segment objects, reslice them to be in a single day
     DayGrid.prototype.resliceDaySegs = function (segs, dayDate) {
@@ -1530,17 +1530,17 @@ var SimpleDayGrid = /** @class */ (function (_super) {
         return _this;
     }
     SimpleDayGrid.prototype.firstContext = function (context) {
-        context.calendar.registerInteractiveComponent(this, { el: this.dayGrid.el });
+        context.Calendar.registerInteractiveComponent(this, { el: this.dayGrid.el });
     };
     SimpleDayGrid.prototype.destroy = function () {
         _super.prototype.destroy.call(this);
-        this.context.calendar.unregisterInteractiveComponent(this);
+        this.context.Calendar.unregisterInteractiveComponent(this);
     };
     SimpleDayGrid.prototype.render = function (props, context) {
         var dayGrid = this.dayGrid;
         var dateProfile = props.dateProfile, dayTable = props.dayTable;
         dayGrid.receiveContext(context); // hack because context is used in sliceProps
-        dayGrid.receiveProps(__assign({}, this.slicer.sliceProps(props, dateProfile, props.nextDayThreshold, context.calendar, dayGrid, dayTable), { dateProfile: dateProfile, cells: dayTable.cells, isRigid: props.isRigid }), context);
+        dayGrid.receiveProps(__assign({}, this.slicer.sliceProps(props, dateProfile, props.nextDayThreshold, context.Calendar, dayGrid, dayTable), { dateProfile: dateProfile, cells: dayTable.cells, isRigid: props.isRigid }), context);
     };
     SimpleDayGrid.prototype.buildPositionCaches = function () {
         this.dayGrid.buildPositionCaches();

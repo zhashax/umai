@@ -43,7 +43,7 @@
             LLLL : 'dddd, MMMM[achea] Do, YYYY, A h:mm [vazta]',
             llll: 'ddd, D MMM YYYY, A h:mm [vazta]'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[Aiz] LT',
             nextDay: '[Faleam] LT',
             nextWeek: '[Ieta to] dddd[,] LT',

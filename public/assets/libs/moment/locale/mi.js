@@ -26,7 +26,7 @@
             LLL: 'D MMMM YYYY [i] HH:mm',
             LLLL: 'dddd, D MMMM YYYY [i] HH:mm'
         },
-        calendar: {
+        Calendar: {
             sameDay: '[i teie mahana, i] LT',
             nextDay: '[apopo i] LT',
             nextWeek: 'dddd [i] LT',

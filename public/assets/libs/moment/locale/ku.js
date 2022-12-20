@@ -73,7 +73,7 @@
                 return 'ئێواره‌';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[ئه‌مرۆ كاتژمێر] LT',
             nextDay : '[به‌یانی كاتژمێر] LT',
             nextWeek : 'dddd [كاتژمێر] LT',

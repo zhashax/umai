@@ -28,7 +28,7 @@
             lll : 'YYYY[ko] MMM D[a] HH:mm',
             llll : 'ddd, YYYY[ko] MMM D[a] HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[gaur] LT[etan]',
             nextDay : '[bihar] LT[etan]',
             nextWeek : 'dddd LT[etan]',

@@ -26,7 +26,7 @@
             lll : 'D MMM YYYY HH:mm',
             llll : 'ddd, D MMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[היום ב־]LT',
             nextDay : '[מחר ב־]LT',
             nextWeek : 'dddd [בשעה] LT',

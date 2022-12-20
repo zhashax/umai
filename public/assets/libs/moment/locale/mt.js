@@ -22,7 +22,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'dddd, D MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Illum fil-]LT',
             nextDay : '[Għada fil-]LT',
             nextWeek : 'dddd [fil-]LT',

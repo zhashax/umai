@@ -1,10 +1,10 @@
 /*!
 FullCalendar Bootstrap Plugin v4.4.2
-Docs & License: https://fullcalendar.io/
+Docs & License: https://fullCalendar.io/
 (c) 2019 Adam Shaw
 */
 
-import { createPlugin, Theme } from '@fullcalendar/core';
+import { createPlugin, Theme } from '@fullCalendar/core';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.

@@ -78,7 +78,7 @@
             lll : 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
             llll : 'YYYY [m.] MMMM D [d.], ddd, HH:mm [val.]'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Šiandien] LT',
             nextDay : '[Rytoj] LT',
             nextWeek : 'dddd LT',

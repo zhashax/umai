@@ -59,7 +59,7 @@
             LLL : 'YYYY. [gada] D. MMMM, HH:mm',
             LLLL : 'YYYY. [gada] D. MMMM, dddd, HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Šodien pulksten] LT',
             nextDay : '[Rīt pulksten] LT',
             nextWeek : 'dddd [pulksten] LT',

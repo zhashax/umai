@@ -58,7 +58,7 @@
                 return 'م';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay: '[اليوم على الساعة] LT',
             nextDay: '[غدا على الساعة] LT',
             nextWeek: 'dddd [على الساعة] LT',

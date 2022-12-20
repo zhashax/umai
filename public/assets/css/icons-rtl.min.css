@@ -4017,195 +4017,195 @@ File: Icons Css File
   content: "\f15a6";
 }
 
-.mdi-calendar::before {
+.mdi-Calendar::before {
   content: "\f00ed";
 }
 
-.mdi-calendar-account::before {
+.mdi-Calendar-account::before {
   content: "\f0ed7";
 }
 
-.mdi-calendar-account-outline::before {
+.mdi-Calendar-account-outline::before {
   content: "\f0ed8";
 }
 
-.mdi-calendar-alert::before {
+.mdi-Calendar-alert::before {
   content: "\f0a31";
 }
 
-.mdi-calendar-arrow-left::before {
+.mdi-Calendar-arrow-left::before {
   content: "\f1134";
 }
 
-.mdi-calendar-arrow-right::before {
+.mdi-Calendar-arrow-right::before {
   content: "\f1135";
 }
 
-.mdi-calendar-blank::before {
+.mdi-Calendar-blank::before {
   content: "\f00ee";
 }
 
-.mdi-calendar-blank-multiple::before {
+.mdi-Calendar-blank-multiple::before {
   content: "\f1073";
 }
 
-.mdi-calendar-blank-outline::before {
+.mdi-Calendar-blank-outline::before {
   content: "\f0b66";
 }
 
-.mdi-calendar-check::before {
+.mdi-Calendar-check::before {
   content: "\f00ef";
 }
 
-.mdi-calendar-check-outline::before {
+.mdi-Calendar-check-outline::before {
   content: "\f0c44";
 }
 
-.mdi-calendar-clock::before {
+.mdi-Calendar-clock::before {
   content: "\f00f0";
 }
 
-.mdi-calendar-clock-outline::before {
+.mdi-Calendar-clock-outline::before {
   content: "\f16e1";
 }
 
-.mdi-calendar-cursor::before {
+.mdi-Calendar-cursor::before {
   content: "\f157b";
 }
 
-.mdi-calendar-edit::before {
+.mdi-Calendar-edit::before {
   content: "\f08a7";
 }
 
-.mdi-calendar-end::before {
+.mdi-Calendar-end::before {
   content: "\f166c";
 }
 
-.mdi-calendar-export::before {
+.mdi-Calendar-export::before {
   content: "\f0b24";
 }
 
-.mdi-calendar-heart::before {
+.mdi-Calendar-heart::before {
   content: "\f09d2";
 }
 
-.mdi-calendar-import::before {
+.mdi-Calendar-import::before {
   content: "\f0b25";
 }
 
-.mdi-calendar-lock::before {
+.mdi-Calendar-lock::before {
   content: "\f1641";
 }
 
-.mdi-calendar-lock-outline::before {
+.mdi-Calendar-lock-outline::before {
   content: "\f1642";
 }
 
-.mdi-calendar-minus::before {
+.mdi-Calendar-minus::before {
   content: "\f0d5c";
 }
 
-.mdi-calendar-month::before {
+.mdi-Calendar-month::before {
   content: "\f0e17";
 }
 
-.mdi-calendar-month-outline::before {
+.mdi-Calendar-month-outline::before {
   content: "\f0e18";
 }
 
-.mdi-calendar-multiple::before {
+.mdi-Calendar-multiple::before {
   content: "\f00f1";
 }
 
-.mdi-calendar-multiple-check::before {
+.mdi-Calendar-multiple-check::before {
   content: "\f00f2";
 }
 
-.mdi-calendar-multiselect::before {
+.mdi-Calendar-multiselect::before {
   content: "\f0a32";
 }
 
-.mdi-calendar-outline::before {
+.mdi-Calendar-outline::before {
   content: "\f0b67";
 }
 
-.mdi-calendar-plus::before {
+.mdi-Calendar-plus::before {
   content: "\f00f3";
 }
 
-.mdi-calendar-question::before {
+.mdi-Calendar-question::before {
   content: "\f0692";
 }
 
-.mdi-calendar-range::before {
+.mdi-Calendar-range::before {
   content: "\f0679";
 }
 
-.mdi-calendar-range-outline::before {
+.mdi-Calendar-range-outline::before {
   content: "\f0b68";
 }
 
-.mdi-calendar-refresh::before {
+.mdi-Calendar-refresh::before {
   content: "\f01e1";
 }
 
-.mdi-calendar-refresh-outline::before {
+.mdi-Calendar-refresh-outline::before {
   content: "\f0203";
 }
 
-.mdi-calendar-remove::before {
+.mdi-Calendar-remove::before {
   content: "\f00f4";
 }
 
-.mdi-calendar-remove-outline::before {
+.mdi-Calendar-remove-outline::before {
   content: "\f0c45";
 }
 
-.mdi-calendar-search::before {
+.mdi-Calendar-search::before {
   content: "\f094c";
 }
 
-.mdi-calendar-star::before {
+.mdi-Calendar-star::before {
   content: "\f09d3";
 }
 
-.mdi-calendar-start::before {
+.mdi-Calendar-start::before {
   content: "\f166d";
 }
 
-.mdi-calendar-sync::before {
+.mdi-Calendar-sync::before {
   content: "\f0e8e";
 }
 
-.mdi-calendar-sync-outline::before {
+.mdi-Calendar-sync-outline::before {
   content: "\f0e8f";
 }
 
-.mdi-calendar-text::before {
+.mdi-Calendar-text::before {
   content: "\f00f5";
 }
 
-.mdi-calendar-text-outline::before {
+.mdi-Calendar-text-outline::before {
   content: "\f0c46";
 }
 
-.mdi-calendar-today::before {
+.mdi-Calendar-today::before {
   content: "\f00f6";
 }
 
-.mdi-calendar-week::before {
+.mdi-Calendar-week::before {
   content: "\f0a33";
 }
 
-.mdi-calendar-week-begin::before {
+.mdi-Calendar-week-begin::before {
   content: "\f0a34";
 }
 
-.mdi-calendar-weekend::before {
+.mdi-Calendar-weekend::before {
   content: "\f0ed9";
 }
 
-.mdi-calendar-weekend-outline::before {
+.mdi-Calendar-weekend-outline::before {
   content: "\f0eda";
 }
 
@@ -20049,11 +20049,11 @@ File: Icons Css File
   content: "\f1388";
 }
 
-.mdi-sort-calendar-ascending::before {
+.mdi-sort-Calendar-ascending::before {
   content: "\f1547";
 }
 
-.mdi-sort-calendar-descending::before {
+.mdi-sort-Calendar-descending::before {
   content: "\f1548";
 }
 
@@ -25008,35 +25008,35 @@ readers do not read off random characters that represent icons */
   content: "\f1ec";
 }
 
-.fa-calendar:before {
+.fa-Calendar:before {
   content: "\f133";
 }
 
-.fa-calendar-alt:before {
+.fa-Calendar-alt:before {
   content: "\f073";
 }
 
-.fa-calendar-check:before {
+.fa-Calendar-check:before {
   content: "\f274";
 }
 
-.fa-calendar-day:before {
+.fa-Calendar-day:before {
   content: "\f783";
 }
 
-.fa-calendar-minus:before {
+.fa-Calendar-minus:before {
   content: "\f272";
 }
 
-.fa-calendar-plus:before {
+.fa-Calendar-plus:before {
   content: "\f271";
 }
 
-.fa-calendar-times:before {
+.fa-Calendar-times:before {
   content: "\f273";
 }
 
-.fa-calendar-week:before {
+.fa-Calendar-week:before {
   content: "\f784";
 }
 
@@ -30321,7 +30321,7 @@ readers do not read off random characters that represent icons */
   content: "L";
 }
 
-.dripicons-calendar:before {
+.dripicons-Calendar:before {
   content: "M";
 }
 
@@ -32195,43 +32195,43 @@ readers do not read off random characters that represent icons */
   content: "\eb1b";
 }
 
-.ri-calendar-2-fill:before {
+.ri-Calendar-2-fill:before {
   content: "\eb1c";
 }
 
-.ri-calendar-2-line:before {
+.ri-Calendar-2-line:before {
   content: "\eb1d";
 }
 
-.ri-calendar-check-fill:before {
+.ri-Calendar-check-fill:before {
   content: "\eb1e";
 }
 
-.ri-calendar-check-line:before {
+.ri-Calendar-check-line:before {
   content: "\eb1f";
 }
 
-.ri-calendar-event-fill:before {
+.ri-Calendar-event-fill:before {
   content: "\eb20";
 }
 
-.ri-calendar-event-line:before {
+.ri-Calendar-event-line:before {
   content: "\eb21";
 }
 
-.ri-calendar-fill:before {
+.ri-Calendar-fill:before {
   content: "\eb22";
 }
 
-.ri-calendar-line:before {
+.ri-Calendar-line:before {
   content: "\eb23";
 }
 
-.ri-calendar-todo-fill:before {
+.ri-Calendar-todo-fill:before {
   content: "\eb24";
 }
 
-.ri-calendar-todo-line:before {
+.ri-Calendar-todo-line:before {
   content: "\eb25";
 }
 

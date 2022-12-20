@@ -39,7 +39,7 @@
             lll : 'D MMM YYYY HH:mm',
             llll : 'ddd, D MMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[Hôm nay lúc] LT',
             nextDay: '[Ngày mai lúc] LT',
             nextWeek: 'dddd [tuần tới lúc] LT',

@@ -35,7 +35,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'dddd D MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[hjoed om] LT',
             nextDay: '[moarn om] LT',
             nextWeek: 'dddd [om] LT',

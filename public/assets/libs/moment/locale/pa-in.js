@@ -48,7 +48,7 @@
             LLL : 'D MMMM YYYY, A h:mm ਵਜੇ',
             LLLL : 'dddd, D MMMM YYYY, A h:mm ਵਜੇ'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[ਅਜ] LT',
             nextDay : '[ਕਲ] LT',
             nextWeek : '[ਅਗਲਾ] dddd, LT',

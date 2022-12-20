@@ -37,7 +37,7 @@
                 return '午後';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[今日] LT',
             nextDay : '[明日] LT',
             nextWeek : function (now) {

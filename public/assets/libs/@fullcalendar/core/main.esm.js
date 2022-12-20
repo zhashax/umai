@@ -1,6 +1,6 @@
 /*!
 FullCalendar Core Package v4.4.2
-Docs & License: https://fullcalendar.io/
+Docs & License: https://fullCalendar.io/
 (c) 2019 Adam Shaw
 */
 
@@ -1299,11 +1299,11 @@ function isPropsEqual(obj0, obj1) {
     return true;
 }
 
-function parseEvents(rawEvents, sourceId, calendar, allowOpenRange) {
+function parseEvents(rawEvents, sourceId, Calendar, allowOpenRange) {
     var eventStore = createEmptyEventStore();
     for (var _i = 0, rawEvents_1 = rawEvents; _i < rawEvents_1.length; _i++) {
         var rawEvent = rawEvents_1[_i];
-        var tuple = parseEvent(rawEvent, sourceId, calendar, allowOpenRange);
+        var tuple = parseEvent(rawEvent, sourceId, Calendar, allowOpenRange);
         if (tuple) {
             eventTupleToStore(tuple, eventStore);
         }
@@ -1318,8 +1318,8 @@ function eventTupleToStore(tuple, eventStore) {
     }
     return eventStore;
 }
-function expandRecurring(eventStore, framingRange, calendar) {
-    var dateEnv = calendar.dateEnv;
+function expandRecurring(eventStore, framingRange, Calendar) {
+    var dateEnv = Calendar.dateEnv;
     var defs = eventStore.defs, instances = eventStore.instances;
     // remove existing recurring instances
     instances = filterHash(instances, function (instance) {
@@ -1331,10 +1331,10 @@ function expandRecurring(eventStore, framingRange, calendar) {
             var duration = def.recurringDef.duration;
             if (!duration) {
                 duration = def.allDay ?
-                    calendar.defaultAllDayEventDuration :
-                    calendar.defaultTimedEventDuration;
+                    Calendar.defaultAllDayEventDuration :
+                    Calendar.defaultTimedEventDuration;
             }
-            var starts = expandRecurringRanges(def, duration, framingRange, calendar.dateEnv, calendar.pluginSystem.hooks.recurringTypes);
+            var starts = expandRecurringRanges(def, duration, framingRange, Calendar.dateEnv, Calendar.pluginSystem.hooks.recurringTypes);
             for (var _i = 0, starts_1 = starts; _i < starts_1.length; _i++) {
                 var start = starts_1[_i];
                 var instance = createEventInstance(defId, {
@@ -1349,7 +1349,7 @@ function expandRecurring(eventStore, framingRange, calendar) {
 }
 // retrieves events that have the same groupId as the instance specified by `instanceId`
 // or they are the same as the instance.
-// why might instanceId not be in the store? an event from another calendar?
+// why might instanceId not be in the store? an event from another Calendar?
 function getRelevantEvents(eventStore, instanceId) {
     var instance = eventStore.instances[instanceId];
     if (instance) {
@@ -1369,8 +1369,8 @@ function getRelevantEvents(eventStore, instanceId) {
 function isEventDefsGrouped(def0, def1) {
     return Boolean(def0.groupId && def0.groupId === def1.groupId);
 }
-function transformRawEvents(rawEvents, eventSource, calendar) {
-    var calEachTransform = calendar.opt('eventDataTransform');
+function transformRawEvents(rawEvents, eventSource, Calendar) {
+    var calEachTransform = Calendar.opt('eventDataTransform');
     var sourceEachTransform = eventSource ? eventSource.eventDataTransform : null;
     if (sourceEachTransform) {
         rawEvents = transformEachRawEvent(rawEvents, sourceEachTransform);
@@ -1619,7 +1619,7 @@ var NativeFormatter = /** @class */ (function () {
     };
     NativeFormatter.prototype.formatRange = function (start, end, context) {
         var _a = this, standardDateProps = _a.standardDateProps, extendedSettings = _a.extendedSettings;
-        var diffSeverity = computeMarkerDiffSeverity(start.marker, end.marker, context.calendarSystem);
+        var diffSeverity = computeMarkerDiffSeverity(start.marker, end.marker, context.CalendarSystem);
         if (!diffSeverity) {
             return this.format(start, context);
         }
@@ -1933,8 +1933,8 @@ function formatTimeZoneOffset(minutes, doIso) {
 }
 // Arg Utils
 function createVerboseFormattingArg(start, end, context, separator) {
-    var startInfo = expandZonedMarker(start, context.calendarSystem);
-    var endInfo = end ? expandZonedMarker(end, context.calendarSystem) : null;
+    var startInfo = expandZonedMarker(start, context.CalendarSystem);
+    var endInfo = end ? expandZonedMarker(end, context.CalendarSystem) : null;
     return {
         date: startInfo,
         start: startInfo,
@@ -1944,8 +1944,8 @@ function createVerboseFormattingArg(start, end, context, separator) {
         separator: separator
     };
 }
-function expandZonedMarker(dateInfo, calendarSystem) {
-    var a = calendarSystem.markerToArray(dateInfo.marker);
+function expandZonedMarker(dateInfo, CalendarSystem) {
+    var a = CalendarSystem.markerToArray(dateInfo.marker);
     return {
         marker: dateInfo.marker,
         timeZoneOffset: dateInfo.timeZoneOffset,
@@ -1961,18 +1961,18 @@ function expandZonedMarker(dateInfo, calendarSystem) {
 }
 
 var EventSourceApi = /** @class */ (function () {
-    function EventSourceApi(calendar, internalEventSource) {
-        this.calendar = calendar;
+    function EventSourceApi(Calendar, internalEventSource) {
+        this.Calendar = Calendar;
         this.internalEventSource = internalEventSource;
     }
     EventSourceApi.prototype.remove = function () {
-        this.calendar.dispatch({
+        this.Calendar.dispatch({
             type: 'REMOVE_EVENT_SOURCE',
             sourceId: this.internalEventSource.sourceId
         });
     };
     EventSourceApi.prototype.refetch = function () {
-        this.calendar.dispatch({
+        this.Calendar.dispatch({
             type: 'FETCH_EVENT_SOURCES',
             sourceIds: [this.internalEventSource.sourceId]
         });
@@ -1996,8 +1996,8 @@ var EventSourceApi = /** @class */ (function () {
 }());
 
 var EventApi = /** @class */ (function () {
-    function EventApi(calendar, def, instance) {
-        this._calendar = calendar;
+    function EventApi(Calendar, def, instance) {
+        this._Calendar = Calendar;
         this._def = def;
         this._instance = instance || null;
     }
@@ -2042,7 +2042,7 @@ var EventApi = /** @class */ (function () {
     };
     EventApi.prototype.setStart = function (startInput, options) {
         if (options === void 0) { options = {}; }
-        var dateEnv = this._calendar.dateEnv;
+        var dateEnv = this._Calendar.dateEnv;
         var start = dateEnv.createMarker(startInput);
         if (start && this._instance) { // TODO: warning if parsed bad
             var instanceRange = this._instance.range;
@@ -2057,7 +2057,7 @@ var EventApi = /** @class */ (function () {
     };
     EventApi.prototype.setEnd = function (endInput, options) {
         if (options === void 0) { options = {}; }
-        var dateEnv = this._calendar.dateEnv;
+        var dateEnv = this._Calendar.dateEnv;
         var end;
         if (endInput != null) {
             end = dateEnv.createMarker(endInput);
@@ -2077,7 +2077,7 @@ var EventApi = /** @class */ (function () {
     };
     EventApi.prototype.setDates = function (startInput, endInput, options) {
         if (options === void 0) { options = {}; }
-        var dateEnv = this._calendar.dateEnv;
+        var dateEnv = this._Calendar.dateEnv;
         var standardProps = { allDay: options.allDay };
         var start = dateEnv.createMarker(startInput);
         var end;
@@ -2136,7 +2136,7 @@ var EventApi = /** @class */ (function () {
         var standardProps = { allDay: allDay };
         var maintainDuration = options.maintainDuration;
         if (maintainDuration == null) {
-            maintainDuration = this._calendar.opt('allDayMaintainDuration');
+            maintainDuration = this._Calendar.opt('allDayMaintainDuration');
         }
         if (this._def.allDay !== allDay) {
             standardProps.hasEnd = maintainDuration;
@@ -2144,9 +2144,9 @@ var EventApi = /** @class */ (function () {
         this.mutate({ standardProps: standardProps });
     };
     EventApi.prototype.formatRange = function (formatInput) {
-        var dateEnv = this._calendar.dateEnv;
+        var dateEnv = this._Calendar.dateEnv;
         var instance = this._instance;
-        var formatter = createFormatter(formatInput, this._calendar.opt('defaultRangeSeparator'));
+        var formatter = createFormatter(formatInput, this._Calendar.opt('defaultRangeSeparator'));
         if (this._def.hasEnd) {
             return dateEnv.formatRange(instance.range.start, instance.range.end, formatter, {
                 forcedStartTzo: instance.forcedStartTzo,
@@ -2163,19 +2163,19 @@ var EventApi = /** @class */ (function () {
         var def = this._def;
         var instance = this._instance;
         if (instance) {
-            this._calendar.dispatch({
+            this._Calendar.dispatch({
                 type: 'MUTATE_EVENTS',
                 instanceId: instance.instanceId,
                 mutation: mutation,
                 fromApi: true
             });
-            var eventStore = this._calendar.state.eventStore;
+            var eventStore = this._Calendar.state.eventStore;
             this._def = eventStore.defs[def.defId];
             this._instance = eventStore.instances[instance.instanceId];
         }
     };
     EventApi.prototype.remove = function () {
-        this._calendar.dispatch({
+        this._Calendar.dispatch({
             type: 'REMOVE_EVENT_DEF',
             defId: this._def.defId
         });
@@ -2184,7 +2184,7 @@ var EventApi = /** @class */ (function () {
         get: function () {
             var sourceId = this._def.sourceId;
             if (sourceId) {
-                return new EventSourceApi(this._calendar, this._calendar.state.eventSources[sourceId]);
+                return new EventSourceApi(this._Calendar, this._Calendar.state.eventSources[sourceId]);
             }
             return null;
         },
@@ -2194,7 +2194,7 @@ var EventApi = /** @class */ (function () {
     Object.defineProperty(EventApi.prototype, "start", {
         get: function () {
             return this._instance ?
-                this._calendar.dateEnv.toDate(this._instance.range.start) :
+                this._Calendar.dateEnv.toDate(this._instance.range.start) :
                 null;
         },
         enumerable: true,
@@ -2203,7 +2203,7 @@ var EventApi = /** @class */ (function () {
     Object.defineProperty(EventApi.prototype, "end", {
         get: function () {
             return (this._instance && this._def.hasEnd) ?
-                this._calendar.dateEnv.toDate(this._instance.range.end) :
+                this._Calendar.dateEnv.toDate(this._instance.range.end) :
                 null;
         },
         enumerable: true,
@@ -2387,12 +2387,12 @@ function hasBgRendering(def) {
     return def.rendering === 'background' || def.rendering === 'inverse-background';
 }
 function filterSegsViaEls(context, segs, isMirror) {
-    var calendar = context.calendar, view = context.view;
-    if (calendar.hasPublicHandlers('eventRender')) {
+    var Calendar = context.Calendar, view = context.view;
+    if (Calendar.hasPublicHandlers('eventRender')) {
         segs = segs.filter(function (seg) {
-            var custom = calendar.publiclyTrigger('eventRender', [
+            var custom = Calendar.publiclyTrigger('eventRender', [
                 {
-                    event: new EventApi(calendar, seg.eventRange.def, seg.eventRange.instance),
+                    event: new EventApi(Calendar, seg.eventRange.def, seg.eventRange.instance),
                     isMirror: isMirror,
                     isStart: seg.isStart,
                     isEnd: seg.isEnd,
@@ -2441,13 +2441,13 @@ function compileEventUi(eventDef, eventUiBases) {
 }
 // triggers
 function triggerRenderedSegs(context, segs, isMirrors) {
-    var calendar = context.calendar, view = context.view;
-    if (calendar.hasPublicHandlers('eventPositioned')) {
+    var Calendar = context.Calendar, view = context.view;
+    if (Calendar.hasPublicHandlers('eventPositioned')) {
         for (var _i = 0, segs_2 = segs; _i < segs_2.length; _i++) {
             var seg = segs_2[_i];
-            calendar.publiclyTriggerAfterSizing('eventPositioned', [
+            Calendar.publiclyTriggerAfterSizing('eventPositioned', [
                 {
-                    event: new EventApi(calendar, seg.eventRange.def, seg.eventRange.instance),
+                    event: new EventApi(Calendar, seg.eventRange.def, seg.eventRange.instance),
                     isMirror: isMirrors,
                     isStart: seg.isStart,
                     isEnd: seg.isEnd,
@@ -2457,22 +2457,22 @@ function triggerRenderedSegs(context, segs, isMirrors) {
             ]);
         }
     }
-    if (!calendar.state.eventSourceLoadingLevel) { // avoid initial empty state while pending
-        calendar.afterSizingTriggers._eventsPositioned = [null]; // fire once
+    if (!Calendar.state.eventSourceLoadingLevel) { // avoid initial empty state while pending
+        Calendar.afterSizingTriggers._eventsPositioned = [null]; // fire once
     }
 }
 function triggerWillRemoveSegs(context, segs, isMirrors) {
-    var calendar = context.calendar, view = context.view;
+    var Calendar = context.Calendar, view = context.view;
     for (var _i = 0, segs_3 = segs; _i < segs_3.length; _i++) {
         var seg = segs_3[_i];
-        calendar.trigger('eventElRemove', seg.el);
+        Calendar.trigger('eventElRemove', seg.el);
     }
-    if (calendar.hasPublicHandlers('eventDestroy')) {
+    if (Calendar.hasPublicHandlers('eventDestroy')) {
         for (var _a = 0, segs_4 = segs; _a < segs_4.length; _a++) {
             var seg = segs_4[_a];
-            calendar.publiclyTrigger('eventDestroy', [
+            Calendar.publiclyTrigger('eventDestroy', [
                 {
-                    event: new EventApi(calendar, seg.eventRange.def, seg.eventRange.instance),
+                    event: new EventApi(Calendar, seg.eventRange.def, seg.eventRange.instance),
                     isMirror: isMirrors,
                     el: seg.el,
                     view: view
@@ -2483,8 +2483,8 @@ function triggerWillRemoveSegs(context, segs, isMirrors) {
 }
 // is-interactable
 function computeEventDraggable(context, eventDef, eventUi) {
-    var calendar = context.calendar, view = context.view;
-    var transformers = calendar.pluginSystem.hooks.isDraggableTransformers;
+    var Calendar = context.Calendar, view = context.view;
+    var transformers = Calendar.pluginSystem.hooks.isDraggableTransformers;
     var val = eventUi.startEditable;
     for (var _i = 0, transformers_1 = transformers; _i < transformers_1.length; _i++) {
         var transformer = transformers_1[_i];
@@ -2500,21 +2500,21 @@ function computeEventEndResizable(context, eventDef, eventUi) {
 }
 
 // applies the mutation to ALL defs/instances within the event store
-function applyMutationToEventStore(eventStore, eventConfigBase, mutation, calendar) {
+function applyMutationToEventStore(eventStore, eventConfigBase, mutation, Calendar) {
     var eventConfigs = compileEventUis(eventStore.defs, eventConfigBase);
     var dest = createEmptyEventStore();
     for (var defId in eventStore.defs) {
         var def = eventStore.defs[defId];
-        dest.defs[defId] = applyMutationToEventDef(def, eventConfigs[defId], mutation, calendar.pluginSystem.hooks.eventDefMutationAppliers, calendar);
+        dest.defs[defId] = applyMutationToEventDef(def, eventConfigs[defId], mutation, Calendar.pluginSystem.hooks.eventDefMutationAppliers, Calendar);
     }
     for (var instanceId in eventStore.instances) {
         var instance = eventStore.instances[instanceId];
         var def = dest.defs[instance.defId]; // important to grab the newly modified def
-        dest.instances[instanceId] = applyMutationToEventInstance(instance, def, eventConfigs[instance.defId], mutation, calendar);
+        dest.instances[instanceId] = applyMutationToEventInstance(instance, def, eventConfigs[instance.defId], mutation, Calendar);
     }
     return dest;
 }
-function applyMutationToEventDef(eventDef, eventConfig, mutation, appliers, calendar) {
+function applyMutationToEventDef(eventDef, eventConfig, mutation, appliers, Calendar) {
     var standardProps = mutation.standardProps || {};
     // if hasEnd has not been specified, guess a good value based on deltas.
     // if duration will change, there's no way the default duration will persist,
@@ -2530,16 +2530,16 @@ function applyMutationToEventDef(eventDef, eventConfig, mutation, appliers, cale
     }
     for (var _i = 0, appliers_1 = appliers; _i < appliers_1.length; _i++) {
         var applier = appliers_1[_i];
-        applier(copy, mutation, calendar);
+        applier(copy, mutation, Calendar);
     }
-    if (!copy.hasEnd && calendar.opt('forceEventDuration')) {
+    if (!copy.hasEnd && Calendar.opt('forceEventDuration')) {
         copy.hasEnd = true;
     }
     return copy;
 }
 function applyMutationToEventInstance(eventInstance, eventDef, // must first be modified by applyMutationToEventDef
-eventConfig, mutation, calendar) {
-    var dateEnv = calendar.dateEnv;
+eventConfig, mutation, Calendar) {
+    var dateEnv = Calendar.dateEnv;
     var forceAllDay = mutation.standardProps && mutation.standardProps.allDay === true;
     var clearEnd = mutation.standardProps && mutation.standardProps.hasEnd === false;
     var copy = __assign({}, eventInstance);
@@ -2567,7 +2567,7 @@ eventConfig, mutation, calendar) {
     if (clearEnd) {
         copy.range = {
             start: copy.range.start,
-            end: calendar.getDefaultEventEnd(eventDef.allDay, copy.range.start)
+            end: Calendar.getDefaultEventEnd(eventDef.allDay, copy.range.start)
         };
     }
     // in case event was all-day but the supplied deltas were not
@@ -2580,18 +2580,18 @@ eventConfig, mutation, calendar) {
     }
     // handle invalid durations
     if (copy.range.end < copy.range.start) {
-        copy.range.end = calendar.getDefaultEventEnd(eventDef.allDay, copy.range.start);
+        copy.range.end = Calendar.getDefaultEventEnd(eventDef.allDay, copy.range.start);
     }
     return copy;
 }
 
-function reduceEventStore (eventStore, action, eventSources, dateProfile, calendar) {
+function reduceEventStore (eventStore, action, eventSources, dateProfile, Calendar) {
     switch (action.type) {
         case 'RECEIVE_EVENTS': // raw
-            return receiveRawEvents(eventStore, eventSources[action.sourceId], action.fetchId, action.fetchRange, action.rawEvents, calendar);
+            return receiveRawEvents(eventStore, eventSources[action.sourceId], action.fetchId, action.fetchRange, action.rawEvents, Calendar);
         case 'ADD_EVENTS': // already parsed, but not expanded
             return addEvent(eventStore, action.eventStore, // new ones
-            dateProfile ? dateProfile.activeRange : null, calendar);
+            dateProfile ? dateProfile.activeRange : null, Calendar);
         case 'MERGE_EVENTS': // already parsed and expanded
             return mergeEventStores(eventStore, action.eventStore);
         case 'PREV': // TODO: how do we track all actions that affect dateProfile :(
@@ -2599,15 +2599,15 @@ function reduceEventStore (eventStore, action, eventSources, dateProfile, calend
         case 'SET_DATE':
         case 'SET_VIEW_TYPE':
             if (dateProfile) {
-                return expandRecurring(eventStore, dateProfile.activeRange, calendar);
+                return expandRecurring(eventStore, dateProfile.activeRange, Calendar);
             }
             else {
                 return eventStore;
             }
         case 'CHANGE_TIMEZONE':
-            return rezoneDates(eventStore, action.oldDateEnv, calendar.dateEnv);
+            return rezoneDates(eventStore, action.oldDateEnv, Calendar.dateEnv);
         case 'MUTATE_EVENTS':
-            return applyMutationToRelated(eventStore, action.instanceId, action.mutation, action.fromApi, calendar);
+            return applyMutationToRelated(eventStore, action.instanceId, action.mutation, action.fromApi, Calendar);
         case 'REMOVE_EVENT_INSTANCES':
             return excludeInstances(eventStore, action.instances);
         case 'REMOVE_EVENT_DEF':
@@ -2631,21 +2631,21 @@ function reduceEventStore (eventStore, action, eventSources, dateProfile, calend
             return eventStore;
     }
 }
-function receiveRawEvents(eventStore, eventSource, fetchId, fetchRange, rawEvents, calendar) {
+function receiveRawEvents(eventStore, eventSource, fetchId, fetchRange, rawEvents, Calendar) {
     if (eventSource && // not already removed
         fetchId === eventSource.latestFetchId // TODO: wish this logic was always in event-sources
     ) {
-        var subset = parseEvents(transformRawEvents(rawEvents, eventSource, calendar), eventSource.sourceId, calendar);
+        var subset = parseEvents(transformRawEvents(rawEvents, eventSource, Calendar), eventSource.sourceId, Calendar);
         if (fetchRange) {
-            subset = expandRecurring(subset, fetchRange, calendar);
+            subset = expandRecurring(subset, fetchRange, Calendar);
         }
         return mergeEventStores(excludeEventsBySourceId(eventStore, eventSource.sourceId), subset);
     }
     return eventStore;
 }
-function addEvent(eventStore, subset, expandRange, calendar) {
+function addEvent(eventStore, subset, expandRange, Calendar) {
     if (expandRange) {
-        subset = expandRecurring(subset, expandRange, calendar);
+        subset = expandRecurring(subset, expandRange, Calendar);
     }
     return mergeEventStores(eventStore, subset);
 }
@@ -2665,7 +2665,7 @@ function rezoneDates(eventStore, oldDateEnv, newDateEnv) {
     });
     return { defs: defs, instances: instances };
 }
-function applyMutationToRelated(eventStore, instanceId, mutation, fromApi, calendar) {
+function applyMutationToRelated(eventStore, instanceId, mutation, fromApi, Calendar) {
     var relevant = getRelevantEvents(eventStore, instanceId);
     var eventConfigBase = fromApi ?
         { '': {
@@ -2679,8 +2679,8 @@ function applyMutationToRelated(eventStore, instanceId, mutation, fromApi, calen
                 textColor: '',
                 classNames: []
             } } :
-        calendar.eventUiBases;
-    relevant = applyMutationToEventStore(relevant, eventConfigBase, mutation, calendar);
+        Calendar.eventUiBases;
+    relevant = applyMutationToEventStore(relevant, eventConfigBase, mutation, Calendar);
     return mergeEventStores(eventStore, relevant);
 }
 function excludeEventsBySourceId(eventStore, sourceId) {
@@ -2700,37 +2700,37 @@ function excludeInstances(eventStore, removals) {
 
 // high-level segmenting-aware tester functions
 // ------------------------------------------------------------------------------------------------------------------------
-function isInteractionValid(interaction, calendar) {
-    return isNewPropsValid({ eventDrag: interaction }, calendar); // HACK: the eventDrag props is used for ALL interactions
+function isInteractionValid(interaction, Calendar) {
+    return isNewPropsValid({ eventDrag: interaction }, Calendar); // HACK: the eventDrag props is used for ALL interactions
 }
-function isDateSelectionValid(dateSelection, calendar) {
-    return isNewPropsValid({ dateSelection: dateSelection }, calendar);
+function isDateSelectionValid(dateSelection, Calendar) {
+    return isNewPropsValid({ dateSelection: dateSelection }, Calendar);
 }
-function isNewPropsValid(newProps, calendar) {
-    var view = calendar.view;
-    var props = __assign({ businessHours: view ? view.props.businessHours : createEmptyEventStore(), dateSelection: '', eventStore: calendar.state.eventStore, eventUiBases: calendar.eventUiBases, eventSelection: '', eventDrag: null, eventResize: null }, newProps);
-    return (calendar.pluginSystem.hooks.isPropsValid || isPropsValid)(props, calendar);
+function isNewPropsValid(newProps, Calendar) {
+    var view = Calendar.view;
+    var props = __assign({ businessHours: view ? view.props.businessHours : createEmptyEventStore(), dateSelection: '', eventStore: Calendar.state.eventStore, eventUiBases: Calendar.eventUiBases, eventSelection: '', eventDrag: null, eventResize: null }, newProps);
+    return (Calendar.pluginSystem.hooks.isPropsValid || isPropsValid)(props, Calendar);
 }
-function isPropsValid(state, calendar, dateSpanMeta, filterConfig) {
+function isPropsValid(state, Calendar, dateSpanMeta, filterConfig) {
     if (dateSpanMeta === void 0) { dateSpanMeta = {}; }
-    if (state.eventDrag && !isInteractionPropsValid(state, calendar, dateSpanMeta, filterConfig)) {
+    if (state.eventDrag && !isInteractionPropsValid(state, Calendar, dateSpanMeta, filterConfig)) {
         return false;
     }
-    if (state.dateSelection && !isDateSelectionPropsValid(state, calendar, dateSpanMeta, filterConfig)) {
+    if (state.dateSelection && !isDateSelectionPropsValid(state, Calendar, dateSpanMeta, filterConfig)) {
         return false;
     }
     return true;
 }
 // Moving Event Validation
 // ------------------------------------------------------------------------------------------------------------------------
-function isInteractionPropsValid(state, calendar, dateSpanMeta, filterConfig) {
+function isInteractionPropsValid(state, Calendar, dateSpanMeta, filterConfig) {
     var interaction = state.eventDrag; // HACK: the eventDrag props is used for ALL interactions
     var subjectEventStore = interaction.mutatedEvents;
     var subjectDefs = subjectEventStore.defs;
     var subjectInstances = subjectEventStore.instances;
     var subjectConfigs = compileEventUis(subjectDefs, interaction.isEvent ?
         state.eventUiBases :
-        { '': calendar.selectionConfig } // if not a real event, validate as a selection
+        { '': Calendar.selectionConfig } // if not a real event, validate as a selection
     );
     if (filterConfig) {
         subjectConfigs = mapHash(subjectConfigs, filterConfig);
@@ -2745,11 +2745,11 @@ function isInteractionPropsValid(state, calendar, dateSpanMeta, filterConfig) {
         var subjectConfig = subjectConfigs[subjectInstance.defId];
         var subjectDef = subjectDefs[subjectInstance.defId];
         // constraint
-        if (!allConstraintsPass(subjectConfig.constraints, subjectRange, otherEventStore, state.businessHours, calendar)) {
+        if (!allConstraintsPass(subjectConfig.constraints, subjectRange, otherEventStore, state.businessHours, Calendar)) {
             return false;
         }
         // overlap
-        var overlapFunc = calendar.opt('eventOverlap');
+        var overlapFunc = Calendar.opt('eventOverlap');
         if (typeof overlapFunc !== 'function') {
             overlapFunc = null;
         }
@@ -2765,28 +2765,28 @@ function isInteractionPropsValid(state, calendar, dateSpanMeta, filterConfig) {
                 if (subjectConfig.overlap === false) {
                     return false;
                 }
-                if (overlapFunc && !overlapFunc(new EventApi(calendar, otherDefs[otherInstance.defId], otherInstance), // still event
-                new EventApi(calendar, subjectDef, subjectInstance) // moving event
+                if (overlapFunc && !overlapFunc(new EventApi(Calendar, otherDefs[otherInstance.defId], otherInstance), // still event
+                new EventApi(Calendar, subjectDef, subjectInstance) // moving event
                 )) {
                     return false;
                 }
             }
         }
         // allow (a function)
-        var calendarEventStore = calendar.state.eventStore; // need global-to-calendar, not local to component (splittable)state
+        var CalendarEventStore = Calendar.state.eventStore; // need global-to-Calendar, not local to component (splittable)state
         for (var _i = 0, _a = subjectConfig.allows; _i < _a.length; _i++) {
             var subjectAllow = _a[_i];
             var subjectDateSpan = __assign({}, dateSpanMeta, { range: subjectInstance.range, allDay: subjectDef.allDay });
-            var origDef = calendarEventStore.defs[subjectDef.defId];
-            var origInstance = calendarEventStore.instances[subjectInstanceId];
+            var origDef = CalendarEventStore.defs[subjectDef.defId];
+            var origInstance = CalendarEventStore.instances[subjectInstanceId];
             var eventApi = void 0;
-            if (origDef) { // was previously in the calendar
-                eventApi = new EventApi(calendar, origDef, origInstance);
+            if (origDef) { // was previously in the Calendar
+                eventApi = new EventApi(Calendar, origDef, origInstance);
             }
             else { // was an external event
-                eventApi = new EventApi(calendar, subjectDef); // no instance, because had no dates
+                eventApi = new EventApi(Calendar, subjectDef); // no instance, because had no dates
             }
-            if (!subjectAllow(calendar.buildDateSpanApi(subjectDateSpan), eventApi)) {
+            if (!subjectAllow(Calendar.buildDateSpanApi(subjectDateSpan), eventApi)) {
                 return false;
             }
         }
@@ -2795,22 +2795,22 @@ function isInteractionPropsValid(state, calendar, dateSpanMeta, filterConfig) {
 }
 // Date Selection Validation
 // ------------------------------------------------------------------------------------------------------------------------
-function isDateSelectionPropsValid(state, calendar, dateSpanMeta, filterConfig) {
+function isDateSelectionPropsValid(state, Calendar, dateSpanMeta, filterConfig) {
     var relevantEventStore = state.eventStore;
     var relevantDefs = relevantEventStore.defs;
     var relevantInstances = relevantEventStore.instances;
     var selection = state.dateSelection;
     var selectionRange = selection.range;
-    var selectionConfig = calendar.selectionConfig;
+    var selectionConfig = Calendar.selectionConfig;
     if (filterConfig) {
         selectionConfig = filterConfig(selectionConfig);
     }
     // constraint
-    if (!allConstraintsPass(selectionConfig.constraints, selectionRange, relevantEventStore, state.businessHours, calendar)) {
+    if (!allConstraintsPass(selectionConfig.constraints, selectionRange, relevantEventStore, state.businessHours, Calendar)) {
         return false;
     }
     // overlap
-    var overlapFunc = calendar.opt('selectOverlap');
+    var overlapFunc = Calendar.opt('selectOverlap');
     if (typeof overlapFunc !== 'function') {
         overlapFunc = null;
     }
@@ -2821,7 +2821,7 @@ function isDateSelectionPropsValid(state, calendar, dateSpanMeta, filterConfig) 
             if (selectionConfig.overlap === false) {
                 return false;
             }
-            if (overlapFunc && !overlapFunc(new EventApi(calendar, relevantDefs[relevantInstance.defId], relevantInstance))) {
+            if (overlapFunc && !overlapFunc(new EventApi(Calendar, relevantDefs[relevantInstance.defId], relevantInstance))) {
                 return false;
             }
         }
@@ -2830,7 +2830,7 @@ function isDateSelectionPropsValid(state, calendar, dateSpanMeta, filterConfig) 
     for (var _i = 0, _a = selectionConfig.allows; _i < _a.length; _i++) {
         var selectionAllow = _a[_i];
         var fullDateSpan = __assign({}, dateSpanMeta, selection);
-        if (!selectionAllow(calendar.buildDateSpanApi(fullDateSpan), null)) {
+        if (!selectionAllow(Calendar.buildDateSpanApi(fullDateSpan), null)) {
             return false;
         }
     }
@@ -2838,10 +2838,10 @@ function isDateSelectionPropsValid(state, calendar, dateSpanMeta, filterConfig) 
 }
 // Constraint Utils
 // ------------------------------------------------------------------------------------------------------------------------
-function allConstraintsPass(constraints, subjectRange, otherEventStore, businessHoursUnexpanded, calendar) {
+function allConstraintsPass(constraints, subjectRange, otherEventStore, businessHoursUnexpanded, Calendar) {
     for (var _i = 0, constraints_1 = constraints; _i < constraints_1.length; _i++) {
         var constraint = constraints_1[_i];
-        if (!anyRangesContainRange(constraintToRanges(constraint, subjectRange, otherEventStore, businessHoursUnexpanded, calendar), subjectRange)) {
+        if (!anyRangesContainRange(constraintToRanges(constraint, subjectRange, otherEventStore, businessHoursUnexpanded, Calendar), subjectRange)) {
             return false;
         }
     }
@@ -2850,10 +2850,10 @@ function allConstraintsPass(constraints, subjectRange, otherEventStore, business
 function constraintToRanges(constraint, subjectRange, // for expanding a recurring constraint, or expanding business hours
 otherEventStore, // for if constraint is an even group ID
 businessHoursUnexpanded, // for if constraint is 'businessHours'
-calendar // for expanding businesshours
+Calendar // for expanding businesshours
 ) {
     if (constraint === 'businessHours') {
-        return eventStoreToRanges(expandRecurring(businessHoursUnexpanded, subjectRange, calendar));
+        return eventStoreToRanges(expandRecurring(businessHoursUnexpanded, subjectRange, Calendar));
     }
     else if (typeof constraint === 'string') { // an group ID
         return eventStoreToRanges(filterEventStoreDefs(otherEventStore, function (eventDef) {
@@ -2861,7 +2861,7 @@ calendar // for expanding businesshours
         }));
     }
     else if (typeof constraint === 'object' && constraint) { // non-null object
-        return eventStoreToRanges(expandRecurring(constraint, subjectRange, calendar));
+        return eventStoreToRanges(expandRecurring(constraint, subjectRange, Calendar));
     }
     return []; // if it's false
 }
@@ -2886,12 +2886,12 @@ function anyRangesContainRange(outerRanges, innerRange) {
 }
 // Parsing
 // ------------------------------------------------------------------------------------------------------------------------
-function normalizeConstraint(input, calendar) {
+function normalizeConstraint(input, Calendar) {
     if (Array.isArray(input)) {
-        return parseEvents(input, '', calendar, true); // allowOpenRange=true
+        return parseEvents(input, '', Calendar, true); // allowOpenRange=true
     }
     else if (typeof input === 'object' && input) { // non-null object
-        return parseEvents([input], '', calendar, true); // allowOpenRange=true
+        return parseEvents([input], '', Calendar, true); // allowOpenRange=true
     }
     else if (input != null) {
         return String(input);
@@ -2959,9 +2959,9 @@ var UNSCOPED_EVENT_UI_PROPS = {
     borderColor: String,
     textColor: String
 };
-function processUnscopedUiProps(rawProps, calendar, leftovers) {
+function processUnscopedUiProps(rawProps, Calendar, leftovers) {
     var props = refineProps(rawProps, UNSCOPED_EVENT_UI_PROPS, {}, leftovers);
-    var constraint = normalizeConstraint(props.constraint, calendar);
+    var constraint = normalizeConstraint(props.constraint, Calendar);
     return {
         startEditable: props.startEditable != null ? props.startEditable : props.editable,
         durationEditable: props.durationEditable != null ? props.durationEditable : props.editable,
@@ -2974,7 +2974,7 @@ function processUnscopedUiProps(rawProps, calendar, leftovers) {
         classNames: props.classNames.concat(props.className)
     };
 }
-function processScopedUiProps(prefix, rawScoped, calendar, leftovers) {
+function processScopedUiProps(prefix, rawScoped, Calendar, leftovers) {
     var rawUnscoped = {};
     var wasFound = {};
     for (var key in UNSCOPED_EVENT_UI_PROPS) {
@@ -2992,7 +2992,7 @@ function processScopedUiProps(prefix, rawScoped, calendar, leftovers) {
             }
         }
     }
-    return processUnscopedUiProps(rawUnscoped, calendar);
+    return processUnscopedUiProps(rawUnscoped, Calendar);
 }
 var EMPTY_EVENT_UI = {
     startEditable: null,
@@ -3038,14 +3038,14 @@ var DATE_PROPS = {
     allDay: null
 };
 var uid = 0;
-function parseEvent(raw, sourceId, calendar, allowOpenRange) {
-    var allDayDefault = computeIsAllDayDefault(sourceId, calendar);
+function parseEvent(raw, sourceId, Calendar, allowOpenRange) {
+    var allDayDefault = computeIsAllDayDefault(sourceId, Calendar);
     var leftovers0 = {};
     var recurringRes = parseRecurring(raw, // raw, but with single-event stuff stripped out
-    allDayDefault, calendar.dateEnv, calendar.pluginSystem.hooks.recurringTypes, leftovers0 // will populate with non-recurring props
+    allDayDefault, Calendar.dateEnv, Calendar.pluginSystem.hooks.recurringTypes, leftovers0 // will populate with non-recurring props
     );
     if (recurringRes) {
-        var def = parseEventDef(leftovers0, sourceId, recurringRes.allDay, Boolean(recurringRes.duration), calendar);
+        var def = parseEventDef(leftovers0, sourceId, recurringRes.allDay, Boolean(recurringRes.duration), Calendar);
         def.recurringDef = {
             typeId: recurringRes.typeId,
             typeData: recurringRes.typeData,
@@ -3055,9 +3055,9 @@ function parseEvent(raw, sourceId, calendar, allowOpenRange) {
     }
     else {
         var leftovers1 = {};
-        var singleRes = parseSingle(raw, allDayDefault, calendar, leftovers1, allowOpenRange);
+        var singleRes = parseSingle(raw, allDayDefault, Calendar, leftovers1, allowOpenRange);
         if (singleRes) {
-            var def = parseEventDef(leftovers1, sourceId, singleRes.allDay, singleRes.hasEnd, calendar);
+            var def = parseEventDef(leftovers1, sourceId, singleRes.allDay, singleRes.hasEnd, Calendar);
             var instance = createEventInstance(def.defId, singleRes.range, singleRes.forcedStartTzo, singleRes.forcedEndTzo);
             return { def: def, instance: instance };
         }
@@ -3069,14 +3069,14 @@ Will NOT populate extendedProps with the leftover properties.
 Will NOT populate date-related props.
 The EventNonDateInput has been normalized (id => publicId, etc).
 */
-function parseEventDef(raw, sourceId, allDay, hasEnd, calendar) {
+function parseEventDef(raw, sourceId, allDay, hasEnd, Calendar) {
     var leftovers = {};
-    var def = pluckNonDateProps(raw, calendar, leftovers);
+    var def = pluckNonDateProps(raw, Calendar, leftovers);
     def.defId = String(uid++);
     def.sourceId = sourceId;
     def.allDay = allDay;
     def.hasEnd = hasEnd;
-    for (var _i = 0, _a = calendar.pluginSystem.hooks.eventDefParsers; _i < _a.length; _i++) {
+    for (var _i = 0, _a = Calendar.pluginSystem.hooks.eventDefParsers; _i < _a.length; _i++) {
         var eventDefParser = _a[_i];
         var newLeftovers = {};
         eventDefParser(def, leftovers, newLeftovers);
@@ -3097,7 +3097,7 @@ function createEventInstance(defId, range, forcedStartTzo, forcedEndTzo) {
         forcedEndTzo: forcedEndTzo == null ? null : forcedEndTzo
     };
 }
-function parseSingle(raw, allDayDefault, calendar, leftovers, allowOpenRange) {
+function parseSingle(raw, allDayDefault, Calendar, leftovers, allowOpenRange) {
     var props = pluckDateProps(raw, leftovers);
     var allDay = props.allDay;
     var startMeta;
@@ -3105,7 +3105,7 @@ function parseSingle(raw, allDayDefault, calendar, leftovers, allowOpenRange) {
     var hasEnd = false;
     var endMeta;
     var endMarker = null;
-    startMeta = calendar.dateEnv.createMarkerMeta(props.start);
+    startMeta = Calendar.dateEnv.createMarkerMeta(props.start);
     if (startMeta) {
         startMarker = startMeta.marker;
     }
@@ -3113,7 +3113,7 @@ function parseSingle(raw, allDayDefault, calendar, leftovers, allowOpenRange) {
         return null;
     }
     if (props.end != null) {
-        endMeta = calendar.dateEnv.createMarkerMeta(props.end);
+        endMeta = Calendar.dateEnv.createMarkerMeta(props.end);
     }
     if (allDay == null) {
         if (allDayDefault != null) {
@@ -3141,10 +3141,10 @@ function parseSingle(raw, allDayDefault, calendar, leftovers, allowOpenRange) {
         hasEnd = true;
     }
     else if (!allowOpenRange) {
-        hasEnd = calendar.opt('forceEventDuration') || false;
-        endMarker = calendar.dateEnv.add(startMarker, allDay ?
-            calendar.defaultAllDayEventDuration :
-            calendar.defaultTimedEventDuration);
+        hasEnd = Calendar.opt('forceEventDuration') || false;
+        endMarker = Calendar.dateEnv.add(startMarker, allDay ?
+            Calendar.defaultAllDayEventDuration :
+            Calendar.defaultTimedEventDuration);
     }
     return {
         allDay: allDay,
@@ -3160,23 +3160,23 @@ function pluckDateProps(raw, leftovers) {
     delete props.date;
     return props;
 }
-function pluckNonDateProps(raw, calendar, leftovers) {
+function pluckNonDateProps(raw, Calendar, leftovers) {
     var preLeftovers = {};
     var props = refineProps(raw, NON_DATE_PROPS, {}, preLeftovers);
-    var ui = processUnscopedUiProps(preLeftovers, calendar, leftovers);
+    var ui = processUnscopedUiProps(preLeftovers, Calendar, leftovers);
     props.publicId = props.id;
     delete props.id;
     props.ui = ui;
     return props;
 }
-function computeIsAllDayDefault(sourceId, calendar) {
+function computeIsAllDayDefault(sourceId, Calendar) {
     var res = null;
     if (sourceId) {
-        var source = calendar.state.eventSources[sourceId];
+        var source = Calendar.state.eventSources[sourceId];
         res = source.allDayDefault;
     }
     if (res == null) {
-        res = calendar.opt('allDayDefault');
+        res = Calendar.opt('allDayDefault');
     }
     return res;
 }
@@ -3192,8 +3192,8 @@ var DEF_DEFAULTS = {
 /*
 TODO: pass around as EventDefHash!!!
 */
-function parseBusinessHours(input, calendar) {
-    return parseEvents(refineInputs(input), '', calendar);
+function parseBusinessHours(input, Calendar) {
+    return parseEvents(refineInputs(input), '', Calendar);
 }
 function refineInputs(input) {
     var rawDefs;
@@ -3350,7 +3350,7 @@ var Splitter = /** @class */ (function () {
     Splitter.prototype._splitInteraction = function (interaction) {
         var splitStates = {};
         if (interaction) {
-            var affectedStores_1 = this._splitEventStore(interaction.affectedEvents, this._getKeysForEventDefs(interaction.affectedEvents) // can't use cached. might be events from other calendar
+            var affectedStores_1 = this._splitEventStore(interaction.affectedEvents, this._getKeysForEventDefs(interaction.affectedEvents) // can't use cached. might be events from other Calendar
             );
             // can't rely on defKeys because event data is mutated
             var mutatedKeysByDefId = this._getKeysForEventDefs(interaction.mutatedEvents);
@@ -3393,7 +3393,7 @@ function buildEventUiForKey(allUi, eventUiForKey, individualUi) {
     return stuff;
 }
 
-// Generates HTML for an anchor to another view into the calendar.
+// Generates HTML for an anchor to another view into the Calendar.
 // Will either generate an <a> tag or a non-clickable <span> tag, depending on enabled settings.
 // `gotoOptions` can either be a DateMarker, or an object with the form:
 // { date, type, forceOff }
@@ -3439,7 +3439,7 @@ function getAllDayHtml(allOptions) {
 }
 // Computes HTML classNames for a single-day element
 function getDayClasses(date, dateProfile, context, noThemeHighlight) {
-    var calendar = context.calendar, options = context.options, theme = context.theme, dateEnv = context.dateEnv;
+    var Calendar = context.Calendar, options = context.options, theme = context.theme, dateEnv = context.dateEnv;
     var classes = [];
     var todayStart;
     var todayEnd;
@@ -3452,7 +3452,7 @@ function getDayClasses(date, dateProfile, context, noThemeHighlight) {
             dateEnv.getMonth(date) !== dateEnv.getMonth(dateProfile.currentRange.start)) {
             classes.push('fc-other-month');
         }
-        todayStart = startOfDay(calendar.getNow());
+        todayStart = startOfDay(Calendar.getNow());
         todayEnd = addDays(todayStart, 1);
         if (date < todayStart) {
             classes.push('fc-past');
@@ -3855,13 +3855,13 @@ var ScrollComponent = /** @class */ (function (_super) {
 }(ElementScrollController));
 
 var Theme = /** @class */ (function () {
-    function Theme(calendarOptions) {
-        this.calendarOptions = calendarOptions;
+    function Theme(CalendarOptions) {
+        this.CalendarOptions = CalendarOptions;
         this.processIconOverride();
     }
     Theme.prototype.processIconOverride = function () {
         if (this.iconOverrideOption) {
-            this.setIconOverride(this.calendarOptions[this.iconOverrideOption]);
+            this.setIconOverride(this.CalendarOptions[this.iconOverrideOption]);
         }
     };
     Theme.prototype.setIconOverride = function (iconOverrideHash) {
@@ -3914,8 +3914,8 @@ Theme.prototype.iconOverridePrefix = '';
 
 var guid = 0;
 var ComponentContext = /** @class */ (function () {
-    function ComponentContext(calendar, theme, dateEnv, options, view) {
-        this.calendar = calendar;
+    function ComponentContext(Calendar, theme, dateEnv, options, view) {
+        this.Calendar = Calendar;
         this.theme = theme;
         this.dateEnv = dateEnv;
         this.options = options;
@@ -3925,7 +3925,7 @@ var ComponentContext = /** @class */ (function () {
         this.nextDayThreshold = createDuration(options.nextDayThreshold);
     }
     ComponentContext.prototype.extend = function (options, view) {
-        return new ComponentContext(this.calendar, this.theme, this.dateEnv, options || this.options, view || this.view);
+        return new ComponentContext(this.Calendar, this.theme, this.dateEnv, options || this.options, view || this.view);
     };
     return ComponentContext;
 }());
@@ -4026,7 +4026,7 @@ var DateComponent = /** @class */ (function (_super) {
     // Validation
     // -----------------------------------------------------------------------------------------------------------------
     DateComponent.prototype.isInteractionValid = function (interaction) {
-        var calendar = this.context.calendar;
+        var Calendar = this.context.Calendar;
         var dateProfile = this.props.dateProfile; // HACK
         var instances = interaction.mutatedEvents.instances;
         if (dateProfile) { // HACK for DayTile
@@ -4036,16 +4036,16 @@ var DateComponent = /** @class */ (function (_super) {
                 }
             }
         }
-        return isInteractionValid(interaction, calendar);
+        return isInteractionValid(interaction, Calendar);
     };
     DateComponent.prototype.isDateSelectionValid = function (selection) {
-        var calendar = this.context.calendar;
+        var Calendar = this.context.Calendar;
         var dateProfile = this.props.dateProfile; // HACK
         if (dateProfile && // HACK for DayTile
             !rangeContainsRange(dateProfile.validRange, selection.range)) {
             return false;
         }
-        return isDateSelectionValid(selection, calendar);
+        return isDateSelectionValid(selection, Calendar);
     };
     // Pointer Interaction Utils
     // -----------------------------------------------------------------------------------------------------------------
@@ -4096,7 +4096,7 @@ function createPlugin(input) {
         viewContainerModifiers: input.viewContainerModifiers || [],
         eventDropTransformers: input.eventDropTransformers || [],
         componentInteractions: input.componentInteractions || [],
-        calendarInteractions: input.calendarInteractions || [],
+        CalendarInteractions: input.CalendarInteractions || [],
         themeClasses: input.themeClasses || {},
         eventSourceDefs: input.eventSourceDefs || [],
         cmdFormatter: input.cmdFormatter,
@@ -4126,7 +4126,7 @@ var PluginSystem = /** @class */ (function () {
             viewContainerModifiers: [],
             eventDropTransformers: [],
             componentInteractions: [],
-            calendarInteractions: [],
+            CalendarInteractions: [],
             themeClasses: {},
             eventSourceDefs: [],
             cmdFormatter: null,
@@ -4167,7 +4167,7 @@ function combineHooks(hooks0, hooks1) {
         eventResizeJoinTransforms: hooks0.eventResizeJoinTransforms.concat(hooks1.eventResizeJoinTransforms),
         viewContainerModifiers: hooks0.viewContainerModifiers.concat(hooks1.viewContainerModifiers),
         eventDropTransformers: hooks0.eventDropTransformers.concat(hooks1.eventDropTransformers),
-        calendarInteractions: hooks0.calendarInteractions.concat(hooks1.calendarInteractions),
+        CalendarInteractions: hooks0.CalendarInteractions.concat(hooks1.CalendarInteractions),
         componentInteractions: hooks0.componentInteractions.concat(hooks1.componentInteractions),
         themeClasses: __assign({}, hooks0.themeClasses, hooks1.themeClasses),
         eventSourceDefs: hooks0.eventSourceDefs.concat(hooks1.eventSourceDefs),
@@ -4212,7 +4212,7 @@ var eventSourceDef$1 = {
         return null;
     },
     fetch: function (arg, success, failure) {
-        var dateEnv = arg.calendar.dateEnv;
+        var dateEnv = arg.Calendar.dateEnv;
         var func = arg.eventSource.meta;
         unpromisify(func.bind(null, {
             start: dateEnv.toDate(arg.range.start),
@@ -4295,7 +4295,7 @@ var eventSourceDef$2 = {
     },
     fetch: function (arg, success, failure) {
         var meta = arg.eventSource.meta;
-        var requestParams = buildRequestParams(meta, arg.range, arg.calendar);
+        var requestParams = buildRequestParams(meta, arg.range, arg.Calendar);
         requestJson(meta.method, meta.url, requestParams, function (rawEvents, xhr) {
             success({ rawEvents: rawEvents, xhr: xhr });
         }, function (errorMessage, xhr) {
@@ -4306,8 +4306,8 @@ var eventSourceDef$2 = {
 var JsonFeedEventSourcePlugin = createPlugin({
     eventSourceDefs: [eventSourceDef$2]
 });
-function buildRequestParams(meta, range, calendar) {
-    var dateEnv = calendar.dateEnv;
+function buildRequestParams(meta, range, Calendar) {
+    var dateEnv = Calendar.dateEnv;
     var startParam;
     var endParam;
     var timeZoneParam;
@@ -4315,15 +4315,15 @@ function buildRequestParams(meta, range, calendar) {
     var params = {};
     startParam = meta.startParam;
     if (startParam == null) {
-        startParam = calendar.opt('startParam');
+        startParam = Calendar.opt('startParam');
     }
     endParam = meta.endParam;
     if (endParam == null) {
-        endParam = calendar.opt('endParam');
+        endParam = Calendar.opt('endParam');
     }
     timeZoneParam = meta.timeZoneParam;
     if (timeZoneParam == null) {
-        timeZoneParam = calendar.opt('timeZoneParam');
+        timeZoneParam = Calendar.opt('timeZoneParam');
     }
     // retrieve any outbound GET/POST data from the options
     if (typeof meta.extraParams === 'function') {
@@ -4417,15 +4417,15 @@ function expandRanges(daysOfWeek, startTime, framingRange, dateEnv) {
 
 var DefaultOptionChangeHandlers = createPlugin({
     optionChangeHandlers: {
-        events: function (events, calendar, deepEqual) {
-            handleEventSources([events], calendar, deepEqual);
+        events: function (events, Calendar, deepEqual) {
+            handleEventSources([events], Calendar, deepEqual);
         },
         eventSources: handleEventSources,
         plugins: handlePlugins
     }
 });
-function handleEventSources(inputs, calendar, deepEqual) {
-    var unfoundSources = hashValuesToArray(calendar.state.eventSources);
+function handleEventSources(inputs, Calendar, deepEqual) {
+    var unfoundSources = hashValuesToArray(Calendar.state.eventSources);
     var newInputs = [];
     for (var _i = 0, inputs_1 = inputs; _i < inputs_1.length; _i++) {
         var input = inputs_1[_i];
@@ -4443,19 +4443,19 @@ function handleEventSources(inputs, calendar, deepEqual) {
     }
     for (var _a = 0, unfoundSources_1 = unfoundSources; _a < unfoundSources_1.length; _a++) {
         var unfoundSource = unfoundSources_1[_a];
-        calendar.dispatch({
+        Calendar.dispatch({
             type: 'REMOVE_EVENT_SOURCE',
             sourceId: unfoundSource.sourceId
         });
     }
     for (var _b = 0, newInputs_1 = newInputs; _b < newInputs_1.length; _b++) {
         var newInput = newInputs_1[_b];
-        calendar.addEventSource(newInput);
+        Calendar.addEventSource(newInput);
     }
 }
 // shortcoming: won't remove plugins
-function handlePlugins(inputs, calendar) {
-    calendar.addPluginInputs(inputs); // will gracefully handle duplicates
+function handlePlugins(inputs, Calendar) {
+    Calendar.addPluginInputs(inputs); // will gracefully handle duplicates
 }
 
 var config = {}; // TODO: make these options
@@ -4671,7 +4671,7 @@ var OptionsManager = /** @class */ (function () {
         }
         this.compute();
     };
-    // Computes the flattened options hash for the calendar and assigns to `this.options`.
+    // Computes the flattened options hash for the Calendar and assigns to `this.options`.
     // Assumes this.overrides and this.dynamicOverrides have already been initialized.
     OptionsManager.prototype.compute = function () {
         // TODO: not a very efficient system
@@ -4697,12 +4697,12 @@ var OptionsManager = /** @class */ (function () {
     return OptionsManager;
 }());
 
-var calendarSystemClassMap = {};
+var CalendarSystemClassMap = {};
 function registerCalendarSystem(name, theClass) {
-    calendarSystemClassMap[name] = theClass;
+    CalendarSystemClassMap[name] = theClass;
 }
 function createCalendarSystem(name) {
-    return new calendarSystemClassMap[name]();
+    return new CalendarSystemClassMap[name]();
 }
 var GregorianCalendarSystem = /** @class */ (function () {
     function GregorianCalendarSystem() {
@@ -4755,7 +4755,7 @@ var DateEnv = /** @class */ (function () {
             this.namedTimeZoneImpl = new settings.namedTimeZoneImpl(timeZone);
         }
         this.canComputeOffset = Boolean(!isNamedTimeZone || this.namedTimeZoneImpl);
-        this.calendarSystem = createCalendarSystem(settings.calendarSystem);
+        this.CalendarSystem = createCalendarSystem(settings.CalendarSystem);
         this.locale = settings.locale;
         this.weekDow = settings.locale.week.dow;
         this.weekDoy = settings.locale.week.doy;
@@ -4831,54 +4831,54 @@ var DateEnv = /** @class */ (function () {
     };
     // Accessors
     DateEnv.prototype.getYear = function (marker) {
-        return this.calendarSystem.getMarkerYear(marker);
+        return this.CalendarSystem.getMarkerYear(marker);
     };
     DateEnv.prototype.getMonth = function (marker) {
-        return this.calendarSystem.getMarkerMonth(marker);
+        return this.CalendarSystem.getMarkerMonth(marker);
     };
     // Adding / Subtracting
     DateEnv.prototype.add = function (marker, dur) {
-        var a = this.calendarSystem.markerToArray(marker);
+        var a = this.CalendarSystem.markerToArray(marker);
         a[0] += dur.years;
         a[1] += dur.months;
         a[2] += dur.days;
         a[6] += dur.milliseconds;
-        return this.calendarSystem.arrayToMarker(a);
+        return this.CalendarSystem.arrayToMarker(a);
     };
     DateEnv.prototype.subtract = function (marker, dur) {
-        var a = this.calendarSystem.markerToArray(marker);
+        var a = this.CalendarSystem.markerToArray(marker);
         a[0] -= dur.years;
         a[1] -= dur.months;
         a[2] -= dur.days;
         a[6] -= dur.milliseconds;
-        return this.calendarSystem.arrayToMarker(a);
+        return this.CalendarSystem.arrayToMarker(a);
     };
     DateEnv.prototype.addYears = function (marker, n) {
-        var a = this.calendarSystem.markerToArray(marker);
+        var a = this.CalendarSystem.markerToArray(marker);
         a[0] += n;
-        return this.calendarSystem.arrayToMarker(a);
+        return this.CalendarSystem.arrayToMarker(a);
     };
     DateEnv.prototype.addMonths = function (marker, n) {
-        var a = this.calendarSystem.markerToArray(marker);
+        var a = this.CalendarSystem.markerToArray(marker);
         a[1] += n;
-        return this.calendarSystem.arrayToMarker(a);
+        return this.CalendarSystem.arrayToMarker(a);
     };
     // Diffing Whole Units
     DateEnv.prototype.diffWholeYears = function (m0, m1) {
-        var calendarSystem = this.calendarSystem;
+        var CalendarSystem = this.CalendarSystem;
         if (timeAsMs(m0) === timeAsMs(m1) &&
-            calendarSystem.getMarkerDay(m0) === calendarSystem.getMarkerDay(m1) &&
-            calendarSystem.getMarkerMonth(m0) === calendarSystem.getMarkerMonth(m1)) {
-            return calendarSystem.getMarkerYear(m1) - calendarSystem.getMarkerYear(m0);
+            CalendarSystem.getMarkerDay(m0) === CalendarSystem.getMarkerDay(m1) &&
+            CalendarSystem.getMarkerMonth(m0) === CalendarSystem.getMarkerMonth(m1)) {
+            return CalendarSystem.getMarkerYear(m1) - CalendarSystem.getMarkerYear(m0);
         }
         return null;
     };
     DateEnv.prototype.diffWholeMonths = function (m0, m1) {
-        var calendarSystem = this.calendarSystem;
+        var CalendarSystem = this.CalendarSystem;
         if (timeAsMs(m0) === timeAsMs(m1) &&
-            calendarSystem.getMarkerDay(m0) === calendarSystem.getMarkerDay(m1)) {
-            return (calendarSystem.getMarkerMonth(m1) - calendarSystem.getMarkerMonth(m0)) +
-                (calendarSystem.getMarkerYear(m1) - calendarSystem.getMarkerYear(m0)) * 12;
+            CalendarSystem.getMarkerDay(m0) === CalendarSystem.getMarkerDay(m1)) {
+            return (CalendarSystem.getMarkerMonth(m1) - CalendarSystem.getMarkerMonth(m0)) +
+                (CalendarSystem.getMarkerYear(m1) - CalendarSystem.getMarkerYear(m0)) * 12;
         }
         return null;
     };
@@ -4962,20 +4962,20 @@ var DateEnv = /** @class */ (function () {
         }
     };
     DateEnv.prototype.startOfYear = function (m) {
-        return this.calendarSystem.arrayToMarker([
-            this.calendarSystem.getMarkerYear(m)
+        return this.CalendarSystem.arrayToMarker([
+            this.CalendarSystem.getMarkerYear(m)
         ]);
     };
     DateEnv.prototype.startOfMonth = function (m) {
-        return this.calendarSystem.arrayToMarker([
-            this.calendarSystem.getMarkerYear(m),
-            this.calendarSystem.getMarkerMonth(m)
+        return this.CalendarSystem.arrayToMarker([
+            this.CalendarSystem.getMarkerYear(m),
+            this.CalendarSystem.getMarkerMonth(m)
         ]);
     };
     DateEnv.prototype.startOfWeek = function (m) {
-        return this.calendarSystem.arrayToMarker([
-            this.calendarSystem.getMarkerYear(m),
-            this.calendarSystem.getMarkerMonth(m),
+        return this.CalendarSystem.arrayToMarker([
+            this.CalendarSystem.getMarkerYear(m),
+            this.CalendarSystem.getMarkerMonth(m),
             m.getUTCDate() - ((m.getUTCDay() - this.weekDow + 7) % 7)
         ]);
     };
@@ -5080,28 +5080,28 @@ var SIMPLE_SOURCE_PROPS = {
     failure: Function
 };
 var uid$2 = 0;
-function doesSourceNeedRange(eventSource, calendar) {
-    var defs = calendar.pluginSystem.hooks.eventSourceDefs;
+function doesSourceNeedRange(eventSource, Calendar) {
+    var defs = Calendar.pluginSystem.hooks.eventSourceDefs;
     return !defs[eventSource.sourceDefId].ignoreRange;
 }
-function parseEventSource(raw, calendar) {
-    var defs = calendar.pluginSystem.hooks.eventSourceDefs;
+function parseEventSource(raw, Calendar) {
+    var defs = Calendar.pluginSystem.hooks.eventSourceDefs;
     for (var i = defs.length - 1; i >= 0; i--) { // later-added plugins take precedence
         var def = defs[i];
         var meta = def.parseMeta(raw);
         if (meta) {
-            var res = parseEventSourceProps(typeof raw === 'object' ? raw : {}, meta, i, calendar);
+            var res = parseEventSourceProps(typeof raw === 'object' ? raw : {}, meta, i, Calendar);
             res._raw = raw;
             return res;
         }
     }
     return null;
 }
-function parseEventSourceProps(raw, meta, sourceDefId, calendar) {
+function parseEventSourceProps(raw, meta, sourceDefId, Calendar) {
     var leftovers0 = {};
     var props = refineProps(raw, SIMPLE_SOURCE_PROPS, {}, leftovers0);
     var leftovers1 = {};
-    var ui = processUnscopedUiProps(leftovers0, calendar, leftovers1);
+    var ui = processUnscopedUiProps(leftovers0, Calendar, leftovers1);
     props.isFetching = false;
     props.latestFetchId = '';
     props.fetchRange = null;
@@ -5114,10 +5114,10 @@ function parseEventSourceProps(raw, meta, sourceDefId, calendar) {
     return props;
 }
 
-function reduceEventSources (eventSources, action, dateProfile, calendar) {
+function reduceEventSources (eventSources, action, dateProfile, Calendar) {
     switch (action.type) {
         case 'ADD_EVENT_SOURCES': // already parsed
-            return addSources(eventSources, action.sources, dateProfile ? dateProfile.activeRange : null, calendar);
+            return addSources(eventSources, action.sources, dateProfile ? dateProfile.activeRange : null, Calendar);
         case 'REMOVE_EVENT_SOURCE':
             return removeSource(eventSources, action.sourceId);
         case 'PREV': // TODO: how do we track all actions that affect dateProfile :(
@@ -5125,7 +5125,7 @@ function reduceEventSources (eventSources, action, dateProfile, calendar) {
         case 'SET_DATE':
         case 'SET_VIEW_TYPE':
             if (dateProfile) {
-                return fetchDirtySources(eventSources, dateProfile.activeRange, calendar);
+                return fetchDirtySources(eventSources, dateProfile.activeRange, Calendar);
             }
             else {
                 return eventSources;
@@ -5134,7 +5134,7 @@ function reduceEventSources (eventSources, action, dateProfile, calendar) {
         case 'CHANGE_TIMEZONE':
             return fetchSourcesByIds(eventSources, action.sourceIds ?
                 arrayToHash(action.sourceIds) :
-                excludeStaticSources(eventSources, calendar), dateProfile ? dateProfile.activeRange : null, calendar);
+                excludeStaticSources(eventSources, Calendar), dateProfile ? dateProfile.activeRange : null, Calendar);
         case 'RECEIVE_EVENTS':
         case 'RECEIVE_EVENT_ERROR':
             return receiveResponse(eventSources, action.sourceId, action.fetchId, action.fetchRange);
@@ -5145,14 +5145,14 @@ function reduceEventSources (eventSources, action, dateProfile, calendar) {
     }
 }
 var uid$3 = 0;
-function addSources(eventSourceHash, sources, fetchRange, calendar) {
+function addSources(eventSourceHash, sources, fetchRange, Calendar) {
     var hash = {};
     for (var _i = 0, sources_1 = sources; _i < sources_1.length; _i++) {
         var source = sources_1[_i];
         hash[source.sourceId] = source;
     }
     if (fetchRange) {
-        hash = fetchDirtySources(hash, fetchRange, calendar);
+        hash = fetchDirtySources(hash, fetchRange, Calendar);
     }
     return __assign({}, eventSourceHash, hash);
 }
@@ -5161,29 +5161,29 @@ function removeSource(eventSourceHash, sourceId) {
         return eventSource.sourceId !== sourceId;
     });
 }
-function fetchDirtySources(sourceHash, fetchRange, calendar) {
+function fetchDirtySources(sourceHash, fetchRange, Calendar) {
     return fetchSourcesByIds(sourceHash, filterHash(sourceHash, function (eventSource) {
-        return isSourceDirty(eventSource, fetchRange, calendar);
-    }), fetchRange, calendar);
+        return isSourceDirty(eventSource, fetchRange, Calendar);
+    }), fetchRange, Calendar);
 }
-function isSourceDirty(eventSource, fetchRange, calendar) {
-    if (!doesSourceNeedRange(eventSource, calendar)) {
+function isSourceDirty(eventSource, fetchRange, Calendar) {
+    if (!doesSourceNeedRange(eventSource, Calendar)) {
         return !eventSource.latestFetchId;
     }
     else {
-        return !calendar.opt('lazyFetching') ||
+        return !Calendar.opt('lazyFetching') ||
             !eventSource.fetchRange ||
             eventSource.isFetching || // always cancel outdated in-progress fetches
             fetchRange.start < eventSource.fetchRange.start ||
             fetchRange.end > eventSource.fetchRange.end;
     }
 }
-function fetchSourcesByIds(prevSources, sourceIdHash, fetchRange, calendar) {
+function fetchSourcesByIds(prevSources, sourceIdHash, fetchRange, Calendar) {
     var nextSources = {};
     for (var sourceId in prevSources) {
         var source = prevSources[sourceId];
         if (sourceIdHash[sourceId]) {
-            nextSources[sourceId] = fetchSource(source, fetchRange, calendar);
+            nextSources[sourceId] = fetchSource(source, fetchRange, Calendar);
         }
         else {
             nextSources[sourceId] = source;
@@ -5191,16 +5191,16 @@ function fetchSourcesByIds(prevSources, sourceIdHash, fetchRange, calendar) {
     }
     return nextSources;
 }
-function fetchSource(eventSource, fetchRange, calendar) {
-    var sourceDef = calendar.pluginSystem.hooks.eventSourceDefs[eventSource.sourceDefId];
+function fetchSource(eventSource, fetchRange, Calendar) {
+    var sourceDef = Calendar.pluginSystem.hooks.eventSourceDefs[eventSource.sourceDefId];
     var fetchId = String(uid$3++);
     sourceDef.fetch({
         eventSource: eventSource,
-        calendar: calendar,
+        Calendar: Calendar,
         range: fetchRange
     }, function (res) {
         var rawEvents = res.rawEvents;
-        var calSuccess = calendar.opt('eventSourceSuccess');
+        var calSuccess = Calendar.opt('eventSourceSuccess');
         var calSuccessRes;
         var sourceSuccessRes;
         if (eventSource.success) {
@@ -5210,7 +5210,7 @@ function fetchSource(eventSource, fetchRange, calendar) {
             calSuccessRes = calSuccess(rawEvents, res.xhr);
         }
         rawEvents = sourceSuccessRes || calSuccessRes || rawEvents;
-        calendar.dispatch({
+        Calendar.dispatch({
             type: 'RECEIVE_EVENTS',
             sourceId: eventSource.sourceId,
             fetchId: fetchId,
@@ -5218,7 +5218,7 @@ function fetchSource(eventSource, fetchRange, calendar) {
             rawEvents: rawEvents
         });
     }, function (error) {
-        var callFailure = calendar.opt('eventSourceFailure');
+        var callFailure = Calendar.opt('eventSourceFailure');
         console.warn(error.message, error);
         if (eventSource.failure) {
             eventSource.failure(error);
@@ -5226,7 +5226,7 @@ function fetchSource(eventSource, fetchRange, calendar) {
         if (callFailure) {
             callFailure(error);
         }
-        calendar.dispatch({
+        Calendar.dispatch({
             type: 'RECEIVE_EVENT_ERROR',
             sourceId: eventSource.sourceId,
             fetchId: fetchId,
@@ -5246,18 +5246,18 @@ function receiveResponse(sourceHash, sourceId, fetchId, fetchRange) {
     }
     return sourceHash;
 }
-function excludeStaticSources(eventSources, calendar) {
+function excludeStaticSources(eventSources, Calendar) {
     return filterHash(eventSources, function (eventSource) {
-        return doesSourceNeedRange(eventSource, calendar);
+        return doesSourceNeedRange(eventSource, Calendar);
     });
 }
 
 var DateProfileGenerator = /** @class */ (function () {
-    function DateProfileGenerator(viewSpec, calendar) {
+    function DateProfileGenerator(viewSpec, Calendar) {
         this.viewSpec = viewSpec;
         this.options = viewSpec.options;
-        this.dateEnv = calendar.dateEnv;
-        this.calendar = calendar;
+        this.dateEnv = Calendar.dateEnv;
+        this.Calendar = Calendar;
         this.initHiddenDays();
     }
     /* Date Range Computation
@@ -5339,7 +5339,7 @@ var DateProfileGenerator = /** @class */ (function () {
     // Indicates the minimum/maximum dates to display.
     // not responsible for trimming hidden days.
     DateProfileGenerator.prototype.buildValidRange = function () {
-        return this.getRangeOption('validRange', this.calendar.getNow()) ||
+        return this.getRangeOption('validRange', this.Calendar.getNow()) ||
             { start: null, end: null }; // completely open-ended
     };
     // Builds a structure with info about the "current" range, the range that is
@@ -5594,15 +5594,15 @@ function isDateProfilesEqual(p0, p1) {
     */
 }
 
-function reduce (state, action, calendar) {
+function reduce (state, action, Calendar) {
     var viewType = reduceViewType(state.viewType, action);
-    var dateProfile = reduceDateProfile(state.dateProfile, action, state.currentDate, viewType, calendar);
-    var eventSources = reduceEventSources(state.eventSources, action, dateProfile, calendar);
+    var dateProfile = reduceDateProfile(state.dateProfile, action, state.currentDate, viewType, Calendar);
+    var eventSources = reduceEventSources(state.eventSources, action, dateProfile, Calendar);
     var nextState = __assign({}, state, { viewType: viewType,
-        dateProfile: dateProfile, currentDate: reduceCurrentDate(state.currentDate, action, dateProfile), eventSources: eventSources, eventStore: reduceEventStore(state.eventStore, action, eventSources, dateProfile, calendar), dateSelection: reduceDateSelection(state.dateSelection, action, calendar), eventSelection: reduceSelectedEvent(state.eventSelection, action), eventDrag: reduceEventDrag(state.eventDrag, action, eventSources, calendar), eventResize: reduceEventResize(state.eventResize, action, eventSources, calendar), eventSourceLoadingLevel: computeLoadingLevel(eventSources), loadingLevel: computeLoadingLevel(eventSources) });
-    for (var _i = 0, _a = calendar.pluginSystem.hooks.reducers; _i < _a.length; _i++) {
+        dateProfile: dateProfile, currentDate: reduceCurrentDate(state.currentDate, action, dateProfile), eventSources: eventSources, eventStore: reduceEventStore(state.eventStore, action, eventSources, dateProfile, Calendar), dateSelection: reduceDateSelection(state.dateSelection, action, Calendar), eventSelection: reduceSelectedEvent(state.eventSelection, action), eventDrag: reduceEventDrag(state.eventDrag, action, eventSources, Calendar), eventResize: reduceEventResize(state.eventResize, action, eventSources, Calendar), eventSourceLoadingLevel: computeLoadingLevel(eventSources), loadingLevel: computeLoadingLevel(eventSources) });
+    for (var _i = 0, _a = Calendar.pluginSystem.hooks.reducers; _i < _a.length; _i++) {
         var reducerFunc = _a[_i];
-        nextState = reducerFunc(nextState, action, calendar);
+        nextState = reducerFunc(nextState, action, Calendar);
     }
     // console.log(action.type, nextState)
     return nextState;
@@ -5615,24 +5615,24 @@ function reduceViewType(currentViewType, action) {
             return currentViewType;
     }
 }
-function reduceDateProfile(currentDateProfile, action, currentDate, viewType, calendar) {
+function reduceDateProfile(currentDateProfile, action, currentDate, viewType, Calendar) {
     var newDateProfile;
     switch (action.type) {
         case 'PREV':
-            newDateProfile = calendar.dateProfileGenerators[viewType].buildPrev(currentDateProfile, currentDate);
+            newDateProfile = Calendar.dateProfileGenerators[viewType].buildPrev(currentDateProfile, currentDate);
             break;
         case 'NEXT':
-            newDateProfile = calendar.dateProfileGenerators[viewType].buildNext(currentDateProfile, currentDate);
+            newDateProfile = Calendar.dateProfileGenerators[viewType].buildNext(currentDateProfile, currentDate);
             break;
         case 'SET_DATE':
             if (!currentDateProfile.activeRange ||
                 !rangeContainsMarker(currentDateProfile.currentRange, action.dateMarker)) {
-                newDateProfile = calendar.dateProfileGenerators[viewType].build(action.dateMarker, undefined, true // forceToValid
+                newDateProfile = Calendar.dateProfileGenerators[viewType].build(action.dateMarker, undefined, true // forceToValid
                 );
             }
             break;
         case 'SET_VIEW_TYPE':
-            var generator = calendar.dateProfileGenerators[viewType];
+            var generator = Calendar.dateProfileGenerators[viewType];
             if (!generator) {
                 throw new Error(viewType ?
                     'The FullCalendar view "' + viewType + '" does not exist. Make sure your plugins are loaded correctly.' :
@@ -5674,7 +5674,7 @@ function reduceCurrentDate(currentDate, action, dateProfile) {
             return currentDate;
     }
 }
-function reduceDateSelection(currentSelection, action, calendar) {
+function reduceDateSelection(currentSelection, action, Calendar) {
     switch (action.type) {
         case 'SELECT_DATES':
             return action.selection;
@@ -5694,7 +5694,7 @@ function reduceSelectedEvent(currentInstanceId, action) {
             return currentInstanceId;
     }
 }
-function reduceEventDrag(currentDrag, action, sources, calendar) {
+function reduceEventDrag(currentDrag, action, sources, Calendar) {
     switch (action.type) {
         case 'SET_EVENT_DRAG':
             var newDrag = action.state;
@@ -5710,7 +5710,7 @@ function reduceEventDrag(currentDrag, action, sources, calendar) {
             return currentDrag;
     }
 }
-function reduceEventResize(currentResize, action, sources, calendar) {
+function reduceEventResize(currentResize, action, sources, Calendar) {
     switch (action.type) {
         case 'SET_EVENT_RESIZE':
             var newResize = action.state;
@@ -5818,10 +5818,10 @@ function buildDatePointApi(span, dateEnv) {
         allDay: span.allDay
     };
 }
-function fabricateEventRange(dateSpan, eventUiBases, calendar) {
+function fabricateEventRange(dateSpan, eventUiBases, Calendar) {
     var def = parseEventDef({ editable: false }, '', // sourceId
     dateSpan.allDay, true, // hasEnd
-    calendar);
+    Calendar);
     return {
         def: def,
         ui: compileEventUi(def, eventUiBases),
@@ -6016,13 +6016,13 @@ var Toolbar = /** @class */ (function (_super) {
     };
     Toolbar.prototype.renderSection = function (position, buttonStr) {
         var _this = this;
-        var _a = this.context, theme = _a.theme, calendar = _a.calendar;
-        var optionsManager = calendar.optionsManager;
-        var viewSpecs = calendar.viewSpecs;
+        var _a = this.context, theme = _a.theme, Calendar = _a.Calendar;
+        var optionsManager = Calendar.optionsManager;
+        var viewSpecs = Calendar.viewSpecs;
         var sectionEl = createElement('div', { className: 'fc-' + position });
-        var calendarCustomButtons = optionsManager.computed.customButtons || {};
-        var calendarButtonTextOverrides = optionsManager.overrides.buttonText || {};
-        var calendarButtonText = optionsManager.computed.buttonText || {};
+        var CalendarCustomButtons = optionsManager.computed.customButtons || {};
+        var CalendarButtonTextOverrides = optionsManager.overrides.buttonText || {};
+        var CalendarButtonText = optionsManager.computed.buttonText || {};
         if (buttonStr) {
             buttonStr.split(' ').forEach(function (buttonGroupStr, i) {
                 var groupChildren = [];
@@ -6043,7 +6043,7 @@ var Toolbar = /** @class */ (function (_super) {
                         isOnlyButtons = false;
                     }
                     else {
-                        if ((customButtonProps = calendarCustomButtons[buttonName])) {
+                        if ((customButtonProps = CalendarCustomButtons[buttonName])) {
                             buttonClick = function (ev) {
                                 if (customButtonProps.click) {
                                     customButtonProps.click.call(buttonEl, ev);
@@ -6056,19 +6056,19 @@ var Toolbar = /** @class */ (function (_super) {
                         else if ((viewSpec = viewSpecs[buttonName])) {
                             _this.viewsWithButtons.push(buttonName);
                             buttonClick = function () {
-                                calendar.changeView(buttonName);
+                                Calendar.changeView(buttonName);
                             };
                             (buttonText = viewSpec.buttonTextOverride) ||
                                 (buttonIcon = theme.getIconClass(buttonName)) ||
                                 (buttonText = viewSpec.buttonTextDefault);
                         }
-                        else if (calendar[buttonName]) { // a calendar method
+                        else if (Calendar[buttonName]) { // a Calendar method
                             buttonClick = function () {
-                                calendar[buttonName]();
+                                Calendar[buttonName]();
                             };
-                            (buttonText = calendarButtonTextOverrides[buttonName]) ||
+                            (buttonText = CalendarButtonTextOverrides[buttonName]) ||
                                 (buttonIcon = theme.getIconClass(buttonName)) ||
-                                (buttonText = calendarButtonText[buttonName]);
+                                (buttonText = CalendarButtonText[buttonName]);
                             //            ^ everything else is considered default
                         }
                         if (buttonClick) {
@@ -6155,7 +6155,7 @@ var CalendarComponent = /** @class */ (function (_super) {
         _this.el = el;
         _this.computeTitle = memoize(computeTitle);
         _this.parseBusinessHours = memoize(function (input) {
-            return parseBusinessHours(input, _this.context.calendar);
+            return parseBusinessHours(input, _this.context.Calendar);
         });
         return _this;
     }
@@ -6181,10 +6181,10 @@ var CalendarComponent = /** @class */ (function (_super) {
     CalendarComponent.prototype._renderSkeleton = function (context) {
         this.updateElClassNames(context);
         prependToElement(this.el, this.contentEl = createElement('div', { className: 'fc-view-container' }));
-        var calendar = context.calendar;
-        for (var _i = 0, _a = calendar.pluginSystem.hooks.viewContainerModifiers; _i < _a.length; _i++) {
+        var Calendar = context.Calendar;
+        for (var _i = 0, _a = Calendar.pluginSystem.hooks.viewContainerModifiers; _i < _a.length; _i++) {
             var modifyViewContainer = _a[_i];
-            modifyViewContainer(this.contentEl, calendar);
+            modifyViewContainer(this.contentEl, Calendar);
         }
     };
     CalendarComponent.prototype._unrenderSkeleton = function () {
@@ -6221,11 +6221,11 @@ var CalendarComponent = /** @class */ (function (_super) {
     };
     CalendarComponent.prototype._renderToolbars = function (viewSpec, dateProfile, currentDate, title) {
         var _a = this, context = _a.context, header = _a.header, footer = _a.footer;
-        var options = context.options, calendar = context.calendar;
+        var options = context.options, Calendar = context.Calendar;
         var headerLayout = options.header;
         var footerLayout = options.footer;
         var dateProfileGenerator = this.props.dateProfileGenerator;
-        var now = calendar.getNow();
+        var now = Calendar.getNow();
         var todayInfo = dateProfileGenerator.build(now);
         var prevInfo = dateProfileGenerator.buildPrev(dateProfile, currentDate);
         var nextInfo = dateProfileGenerator.buildNext(dateProfile, currentDate);
@@ -6271,7 +6271,7 @@ var CalendarComponent = /** @class */ (function (_super) {
     };
     CalendarComponent.prototype.renderView = function (props, title) {
         var view = this.view;
-        var _a = this.context, calendar = _a.calendar, options = _a.options;
+        var _a = this.context, Calendar = _a.Calendar, options = _a.options;
         var viewSpec = props.viewSpec, dateProfileGenerator = props.dateProfileGenerator;
         if (!view || view.viewSpec !== viewSpec) {
             if (view) {
@@ -6295,7 +6295,7 @@ var CalendarComponent = /** @class */ (function (_super) {
             eventDrag: props.eventDrag,
             eventResize: props.eventResize
         };
-        var transformers = this.buildViewPropTransformers(calendar.pluginSystem.hooks.viewPropsTransformers);
+        var transformers = this.buildViewPropTransformers(Calendar.pluginSystem.hooks.viewPropsTransformers);
         for (var _i = 0, transformers_1 = transformers; _i < transformers_1.length; _i++) {
             var transformer = transformers_1[_i];
             __assign(viewProps, transformer.transform(viewProps, viewSpec, props, options));
@@ -6318,9 +6318,9 @@ var CalendarComponent = /** @class */ (function (_super) {
         view.popScroll(isResize);
     };
     CalendarComponent.prototype.computeHeightVars = function () {
-        var calendar = this.context.calendar; // yuck. need to handle dynamic options
-        var heightInput = calendar.opt('height');
-        var contentHeightInput = calendar.opt('contentHeight');
+        var Calendar = this.context.Calendar; // yuck. need to handle dynamic options
+        var heightInput = Calendar.opt('height');
+        var contentHeightInput = Calendar.opt('contentHeight');
         this.isHeightAuto = heightInput === 'auto' || contentHeightInput === 'auto';
         if (typeof contentHeightInput === 'number') { // exists and not 'auto'
             this.viewHeight = contentHeightInput;
@@ -6340,7 +6340,7 @@ var CalendarComponent = /** @class */ (function (_super) {
         }
         else {
             this.viewHeight = Math.round(this.contentEl.getBoundingClientRect().width /
-                Math.max(calendar.opt('aspectRatio'), .5));
+                Math.max(Calendar.opt('aspectRatio'), .5));
         }
     };
     CalendarComponent.prototype.queryToolbarsHeight = function () {
@@ -6371,7 +6371,7 @@ var CalendarComponent = /** @class */ (function (_super) {
 }(Component));
 // Title and Date Formatting
 // -----------------------------------------------------------------------------------------------------------------
-// Computes what the title at the top of the calendar should be for this view
+// Computes what the title at the top of the Calendar should be for this view
 function computeTitle(dateProfile, viewOptions) {
     var range;
     // for views that span a large unit of time, show the proper interval, ignoring stray days before and after
@@ -6450,7 +6450,7 @@ var EventClicking = /** @class */ (function (_super) {
         var _this = _super.call(this, settings) || this;
         _this.handleSegClick = function (ev, segEl) {
             var component = _this.component;
-            var _a = component.context, calendar = _a.calendar, view = _a.view;
+            var _a = component.context, Calendar = _a.Calendar, view = _a.view;
             var seg = getElSeg(segEl);
             if (seg && // might be the <div> surrounding the more link
                 component.isValidSegDownEl(ev.target)) {
@@ -6458,10 +6458,10 @@ var EventClicking = /** @class */ (function (_super) {
                 // grab before trigger fired in case trigger trashes DOM thru rerendering
                 var hasUrlContainer = elementClosest(ev.target, '.fc-has-url');
                 var url = hasUrlContainer ? hasUrlContainer.querySelector('a[href]').href : '';
-                calendar.publiclyTrigger('eventClick', [
+                Calendar.publiclyTrigger('eventClick', [
                     {
                         el: segEl,
-                        event: new EventApi(component.context.calendar, seg.eventRange.def, seg.eventRange.instance),
+                        event: new EventApi(component.context.Calendar, seg.eventRange.def, seg.eventRange.instance),
                         jsEvent: ev,
                         view: view
                     }
@@ -6509,22 +6509,22 @@ var EventHovering = /** @class */ (function (_super) {
         var component = settings.component;
         _this.removeHoverListeners = listenToHoverBySelector(component.el, component.fgSegSelector + ',' + component.bgSegSelector, _this.handleSegEnter, _this.handleSegLeave);
         // how to make sure component already has context?
-        component.context.calendar.on('eventElRemove', _this.handleEventElRemove);
+        component.context.Calendar.on('eventElRemove', _this.handleEventElRemove);
         return _this;
     }
     EventHovering.prototype.destroy = function () {
         this.removeHoverListeners();
-        this.component.context.calendar.off('eventElRemove', this.handleEventElRemove);
+        this.component.context.Calendar.off('eventElRemove', this.handleEventElRemove);
     };
     EventHovering.prototype.triggerEvent = function (publicEvName, ev, segEl) {
         var component = this.component;
-        var _a = component.context, calendar = _a.calendar, view = _a.view;
+        var _a = component.context, Calendar = _a.Calendar, view = _a.view;
         var seg = getElSeg(segEl);
         if (!ev || component.isValidSegDownEl(ev.target)) {
-            calendar.publiclyTrigger(publicEvName, [
+            Calendar.publiclyTrigger(publicEvName, [
                 {
                     el: segEl,
-                    event: new EventApi(calendar, seg.eventRange.def, seg.eventRange.instance),
+                    event: new EventApi(Calendar, seg.eventRange.def, seg.eventRange.instance),
                     jsEvent: ev,
                     view: view
                 }
@@ -6600,9 +6600,9 @@ var Calendar = /** @class */ (function () {
         this.handleOptions(this.optionsManager.computed);
         this.publiclyTrigger('_init'); // for tests
         this.hydrate();
-        this.calendarInteractions = this.pluginSystem.hooks.calendarInteractions
-            .map(function (calendarInteractionClass) {
-            return new calendarInteractionClass(_this);
+        this.CalendarInteractions = this.pluginSystem.hooks.CalendarInteractions
+            .map(function (CalendarInteractionClass) {
+            return new CalendarInteractionClass(_this);
         });
     }
     Calendar.prototype.addPluginInputs = function (pluginInputs) {
@@ -6638,7 +6638,7 @@ var Calendar = /** @class */ (function () {
             this.unbindHandlers();
             this.component.destroy(); // don't null-out. in case API needs access
             this.component = null; // umm ???
-            for (var _i = 0, _a = this.calendarInteractions; _i < _a.length; _i++) {
+            for (var _i = 0, _a = this.CalendarInteractions; _i < _a.length; _i++) {
                 var interaction = _a[_i];
                 interaction.destroy();
             }
@@ -6769,8 +6769,8 @@ var Calendar = /** @class */ (function () {
             this.requestRerender();
         }
     };
-    Calendar.prototype.reduce = function (state, action, calendar) {
-        return reduce(state, action, calendar);
+    Calendar.prototype.reduce = function (state, action, Calendar) {
+        return reduce(state, action, Calendar);
     };
     // Render Queue
     // -----------------------------------------------------------------------------------------------------------------
@@ -7425,7 +7425,7 @@ function buildComponentContext$1(theme, dateEnv, options) {
 }
 function buildDateEnv(locale, timeZone, namedTimeZoneImpl, firstDay, weekNumberCalculation, weekLabel, cmdFormatter) {
     return new DateEnv({
-        calendarSystem: 'gregory',
+        CalendarSystem: 'gregory',
         timeZone: timeZone,
         namedTimeZoneImpl: namedTimeZoneImpl,
         locale: locale,
@@ -7435,9 +7435,9 @@ function buildDateEnv(locale, timeZone, namedTimeZoneImpl, firstDay, weekNumberC
         cmdFormatter: cmdFormatter
     });
 }
-function buildTheme(calendarOptions) {
-    var themeClass = this.pluginSystem.hooks.themeClasses[calendarOptions.themeSystem] || StandardTheme;
-    return new themeClass(calendarOptions);
+function buildTheme(CalendarOptions) {
+    var themeClass = this.pluginSystem.hooks.themeClasses[CalendarOptions.themeSystem] || StandardTheme;
+    return new themeClass(CalendarOptions);
 }
 function buildDelayedRerender(wait) {
     var func = this.tryRerender.bind(this);
@@ -7532,14 +7532,14 @@ var View = /** @class */ (function (_super) {
     // Sizing
     // -----------------------------------------------------------------------------------------------------------------
     View.prototype.updateSize = function (isResize, viewHeight, isAuto) {
-        var calendar = this.context.calendar;
+        var Calendar = this.context.Calendar;
         if (isResize) {
             this.addScroll(this.queryScroll()); // NOTE: same code as in beforeUpdate
         }
         if (isResize || // HACKS...
-            calendar.isViewUpdated ||
-            calendar.isDatesUpdated ||
-            calendar.isEventsUpdated) {
+            Calendar.isViewUpdated ||
+            Calendar.isDatesUpdated ||
+            Calendar.isEventsUpdated) {
             // sort of the catch-all sizing
             // anything that might cause dimension changes
             this.updateBaseSize(isResize, viewHeight, isAuto);
@@ -7639,7 +7639,7 @@ var View = /** @class */ (function (_super) {
     // USAGE: must be called manually from subclasses' render methods! don't need to call stopNowIndicator tho
     View.prototype.startNowIndicator = function (dateProfile, dateProfileGenerator) {
         var _this = this;
-        var _a = this.context, calendar = _a.calendar, dateEnv = _a.dateEnv, options = _a.options;
+        var _a = this.context, Calendar = _a.Calendar, dateEnv = _a.dateEnv, options = _a.options;
         var unit;
         var update;
         var delay; // ms wait value
@@ -7647,7 +7647,7 @@ var View = /** @class */ (function (_super) {
             unit = this.getNowIndicatorUnit(dateProfile, dateProfileGenerator);
             if (unit) {
                 update = this.updateNowIndicator.bind(this);
-                this.initialNowDate = calendar.getNow();
+                this.initialNowDate = Calendar.getNow();
                 this.initialNowQueriedMs = new Date().valueOf();
                 // wait until the beginning of the next interval
                 delay = dateEnv.add(dateEnv.startOf(this.initialNowDate, unit), createDuration(1, unit)).valueOf() - this.initialNowDate.valueOf();
@@ -8167,7 +8167,7 @@ function formatRange(startInput, endInput, settings // mixture of env and format
 function buildDateEnv$1(settings) {
     var locale = buildLocale(settings.locale || 'en', parseRawLocales([]).map); // TODO: don't hardcode 'en' everywhere
     // ensure required settings
-    settings = __assign({ timeZone: globalDefaults.timeZone, calendarSystem: 'gregory' }, settings, { locale: locale });
+    settings = __assign({ timeZone: globalDefaults.timeZone, CalendarSystem: 'gregory' }, settings, { locale: locale });
     return new DateEnv(settings);
 }
 
@@ -8440,7 +8440,7 @@ var Slicer = /** @class */ (function () {
         this.sliceEventDrag = memoize(this._sliceInteraction);
         this.sliceEventResize = memoize(this._sliceInteraction);
     }
-    Slicer.prototype.sliceProps = function (props, dateProfile, nextDayThreshold, calendar, component) {
+    Slicer.prototype.sliceProps = function (props, dateProfile, nextDayThreshold, Calendar, component) {
         var extraArgs = [];
         for (var _i = 5; _i < arguments.length; _i++) {
             extraArgs[_i - 5] = arguments[_i];
@@ -8449,7 +8449,7 @@ var Slicer = /** @class */ (function () {
         var eventSegs = this.sliceEventStore.apply(this, [props.eventStore, eventUiBases, dateProfile, nextDayThreshold, component].concat(extraArgs));
         return {
             dateSelectionSegs: this.sliceDateSelection.apply(this, [props.dateSelection, eventUiBases, component].concat(extraArgs)),
-            businessHourSegs: this.sliceBusinessHours.apply(this, [props.businessHours, dateProfile, nextDayThreshold, calendar, component].concat(extraArgs)),
+            businessHourSegs: this.sliceBusinessHours.apply(this, [props.businessHours, dateProfile, nextDayThreshold, Calendar, component].concat(extraArgs)),
             fgEventSegs: eventSegs.fg,
             bgEventSegs: eventSegs.bg,
             eventDrag: this.sliceEventDrag.apply(this, [props.eventDrag, eventUiBases, dateProfile, nextDayThreshold, component].concat(extraArgs)),
@@ -8467,7 +8467,7 @@ var Slicer = /** @class */ (function () {
             {},
             component].concat(extraArgs));
     };
-    Slicer.prototype._sliceBusinessHours = function (businessHours, dateProfile, nextDayThreshold, calendar, component) {
+    Slicer.prototype._sliceBusinessHours = function (businessHours, dateProfile, nextDayThreshold, Calendar, component) {
         var extraArgs = [];
         for (var _i = 5; _i < arguments.length; _i++) {
             extraArgs[_i - 5] = arguments[_i];
@@ -8475,7 +8475,7 @@ var Slicer = /** @class */ (function () {
         if (!businessHours) {
             return [];
         }
-        return this._sliceEventStore.apply(this, [expandRecurring(businessHours, computeActiveRange(dateProfile, Boolean(nextDayThreshold)), calendar),
+        return this._sliceEventStore.apply(this, [expandRecurring(businessHours, computeActiveRange(dateProfile, Boolean(nextDayThreshold)), Calendar),
             {},
             dateProfile,
             nextDayThreshold,
@@ -8521,7 +8521,7 @@ var Slicer = /** @class */ (function () {
         if (!dateSpan) {
             return [];
         }
-        var eventRange = fabricateEventRange(dateSpan, eventUiBases, component.context.calendar);
+        var eventRange = fabricateEventRange(dateSpan, eventUiBases, component.context.Calendar);
         var segs = this.sliceRange.apply(this, [dateSpan.range].concat(extraArgs));
         for (var _a = 0, segs_1 = segs; _a < segs_1.length; _a++) {
             var seg = segs_1[_a];

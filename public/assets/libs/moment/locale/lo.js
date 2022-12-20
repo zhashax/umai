@@ -34,7 +34,7 @@
                 return 'ຕອນແລງ';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[ມື້ນີ້ເວລາ] LT',
             nextDay : '[ມື້ອື່ນເວລາ] LT',
             nextWeek : '[ວັນ]dddd[ໜ້າເວລາ] LT',

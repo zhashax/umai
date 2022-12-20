@@ -58,7 +58,7 @@
                 return 'بعد از ظهر';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[امروز ساعت] LT',
             nextDay : '[فردا ساعت] LT',
             nextWeek : 'dddd [ساعت] LT',

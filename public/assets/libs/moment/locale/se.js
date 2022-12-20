@@ -22,7 +22,7 @@
             LLL : 'MMMM D. [b.] YYYY [ti.] HH:mm',
             LLLL : 'dddd, MMMM D. [b.] YYYY [ti.] HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[otne ti] LT',
             nextDay: '[ihttin ti] LT',
             nextWeek: 'dddd [ti] LT',

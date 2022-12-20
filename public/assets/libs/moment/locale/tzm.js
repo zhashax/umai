@@ -22,7 +22,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'dddd D MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[ⴰⵙⴷⵅ ⴴ] LT',
             nextDay: '[ⴰⵙⴽⴰ ⴴ] LT',
             nextWeek: 'dddd [ⴴ] LT',

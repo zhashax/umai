@@ -75,7 +75,7 @@
             LLL : 'D MMMM YYYY р., HH:mm',
             LLLL : 'dddd, D MMMM YYYY р., HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: processHoursFunction('[Сьогодні '),
             nextDay: processHoursFunction('[Завтра '),
             lastDay: processHoursFunction('[Вчора '),

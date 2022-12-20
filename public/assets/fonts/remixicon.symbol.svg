@@ -1421,52 +1421,52 @@
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M4 2h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm1 2v16h14V4H5zm2 2h10v4H7V6zm0 6h2v2H7v-2zm0 4h2v2H7v-2zm4-4h2v2h-2v-2zm0 4h2v2h-2v-2zm4-4h2v6h-2v-6z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-2-fill">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-2-fill">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zM4 9v10h16V9H4zm2 2h2v2H6v-2zm5 0h2v2h-2v-2zm5 0h2v2h-2v-2z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-2-line">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-2-line">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm3 8H4v8h16v-8zm-5-6H9v2H7V5H4v4h16V5h-3v2h-2V5zm-9 8h2v2H6v-2zm5 0h2v2h-2v-2zm5 0h2v2h-2v-2z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-check-fill">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-check-fill">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M9 1v2h6V1h2v2h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2zm11 7H4v11h16V8zm-4.964 2.136l1.414 1.414-4.95 4.95-3.536-3.536L9.38 11.55l2.121 2.122 3.536-3.536z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-check-line">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-check-line">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M9 1v2h6V1h2v2h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2zm11 9H4v9h16v-9zm-4.964 1.136l1.414 1.414-4.95 4.95-3.536-3.536L9.38 12.55l2.121 2.122 3.536-3.536zM7 5H4v3h16V5h-3v1h-2V5H9v1H7V5z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-event-fill">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-event-fill">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zM4 9v10h16V9H4zm2 4h5v4H6v-4z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-event-line">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-event-line">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm3 6V5h-3v2h-2V5H9v2H7V5H4v4h16zm0 2H4v8h16v-8zM6 13h5v4H6v-4z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-fill">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-fill">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M2 11h20v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-9zm15-8h4a1 1 0 0 1 1 1v5H2V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-line">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-line">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm-2 2H9v2H7V5H4v4h16V5h-3v2h-2V5zm5 6H4v8h16v-8z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-todo-fill">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-todo-fill">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zM4 9v10h16V9H4zm2 2h2v2H6v-2zm0 4h2v2H6v-2zm4-4h8v2h-8v-2zm0 4h5v2h-5v-2z"/>
     </g>
-</symbol><symbol viewBox="0 0 24 24" id="ri-calendar-todo-line">
+</symbol><symbol viewBox="0 0 24 24" id="ri-Calendar-todo-line">
     <g>
         <path fill="none" d="M0 0h24v24H0z"/>
         <path d="M17 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2zm-2 2H9v2H7V5H4v4h16V5h-3v2h-2V5zm5 6H4v8h16v-8zM6 14h2v2H6v-2zm4 0h8v2h-8v-2z"/>

@@ -55,7 +55,7 @@
                 return '晚上';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[今天] LT',
             nextDay : '[明天] LT',
             nextWeek : '[下]dddd LT',

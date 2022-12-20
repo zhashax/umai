@@ -73,7 +73,7 @@
             LLL : 'D MMMM YYYY г., H:mm',
             LLLL : 'dddd, D MMMM YYYY г., H:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[Сегодня, в] LT',
             nextDay: '[Завтра, в] LT',
             lastDay: '[Вчера, в] LT',

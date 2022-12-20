@@ -23,7 +23,7 @@
             LLL: 'D MMMM YYYY HH:mm',
             LLLL: 'dddd D MMMM YYYY HH:mm'
         },
-        calendar: {
+        Calendar: {
             sameDay: '[اليوم على الساعة] LT',
             nextDay: '[غدا على الساعة] LT',
             nextWeek: 'dddd [على الساعة] LT',

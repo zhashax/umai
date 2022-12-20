@@ -35,7 +35,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'dddd, D MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[An-diugh aig] LT',
             nextDay : '[A-màireach aig] LT',
             nextWeek : 'dddd [aig] LT',

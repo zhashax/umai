@@ -419,8 +419,8 @@
         sameElse : 'L'
     };
 
-    function calendar (key, mom, now) {
-        var output = this._calendar[key] || this._calendar['sameElse'];
+    function Calendar (key, mom, now) {
+        var output = this._Calendar[key] || this._Calendar['sameElse'];
         return isFunction(output) ? output.call(mom, now) : output;
     }
 
@@ -1787,7 +1787,7 @@
     var getSetHour = makeGetSet('Hours', true);
 
     var baseConfig = {
-        calendar: defaultCalendar,
+        Calendar: defaultCalendar,
         longDateFormat: defaultLongDateFormat,
         invalidDate: defaultInvalidDate,
         ordinal: defaultOrdinal,
@@ -3186,16 +3186,16 @@
                 diff < 7 ? 'nextWeek' : 'sameElse';
     }
 
-    function calendar$1 (time, formats) {
+    function Calendar$1 (time, formats) {
         // We want to compare the start of today, vs this.
         // Getting start-of-today depends on whether we're local/utc/offset or not.
         var now = time || createLocal(),
             sod = cloneWithOffset(now, this).startOf('day'),
-            format = hooks.calendarFormat(this, sod) || 'sameElse';
+            format = hooks.CalendarFormat(this, sod) || 'sameElse';
 
         var output = formats && (isFunction(formats[format]) ? formats[format].call(this, now) : formats[format]);
 
-        return this.format(output || this.localeData().calendar(format, this, createLocal(now)));
+        return this.format(output || this.localeData().Calendar(format, this, createLocal(now)));
     }
 
     function clone () {
@@ -3923,7 +3923,7 @@
     var proto = Moment.prototype;
 
     proto.add               = add;
-    proto.calendar          = calendar$1;
+    proto.Calendar          = Calendar$1;
     proto.clone             = clone;
     proto.diff              = diff;
     proto.endOf             = endOf;
@@ -4012,7 +4012,7 @@
 
     var proto$1 = Locale.prototype;
 
-    proto$1.calendar        = calendar;
+    proto$1.Calendar        = Calendar;
     proto$1.longDateFormat  = longDateFormat;
     proto$1.invalidDate     = invalidDate;
     proto$1.ordinal         = ordinal;
@@ -4581,7 +4581,7 @@
     hooks.normalizeUnits        = normalizeUnits;
     hooks.relativeTimeRounding  = getSetRelativeTimeRounding;
     hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
-    hooks.calendarFormat        = getCalendarFormat;
+    hooks.CalendarFormat        = getCalendarFormat;
     hooks.prototype             = proto;
 
     // currently HTML5 input type only supports 24-hour formats

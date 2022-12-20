@@ -33,7 +33,7 @@
                 return isLower ? 'a.t.m.' : 'A.T.M.';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Hodiaŭ je] LT',
             nextDay : '[Morgaŭ je] LT',
             nextWeek : 'dddd [je] LT',

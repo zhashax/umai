@@ -24,7 +24,7 @@
             LLL : 'D [de] MMMM [de] YYYY H:mm',
             LLLL : 'dddd, D [de] MMMM [de] YYYY H:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : function () {
                 return '[hoxe ' + ((this.hours() !== 1) ? 'ás' : 'á') + '] LT';
             },

@@ -87,7 +87,7 @@
             LLL : 'D. MMMM YYYY H:mm',
             LLLL : 'dddd D. MMMM YYYY H:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[dnes o] LT',
             nextDay: '[zajtra o] LT',
             nextWeek: function () {

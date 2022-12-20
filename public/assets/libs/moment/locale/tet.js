@@ -22,7 +22,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'dddd, D MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: '[Ohin iha] LT',
             nextDay: '[Aban iha] LT',
             nextWeek: 'dddd [iha] LT',

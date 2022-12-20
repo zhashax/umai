@@ -22,7 +22,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'D MMMM YYYY, dddd HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Bugun soat] LT [da]',
             nextDay : '[Ertaga] LT [da]',
             nextWeek : 'dddd [kuni soat] LT [da]',

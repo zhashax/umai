@@ -22,7 +22,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'D MMMM YYYY, dddd HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Бугун соат] LT [да]',
             nextDay : '[Эртага] LT [да]',
             nextWeek : 'dddd [куни соат] LT [да]',

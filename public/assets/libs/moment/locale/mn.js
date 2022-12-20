@@ -61,7 +61,7 @@
                 return 'ҮХ';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Өнөөдөр] LT',
             nextDay : '[Маргааш] LT',
             nextWeek : '[Ирэх] dddd LT',

@@ -1,10 +1,10 @@
 /*!
 FullCalendar Interaction Plugin v4.4.2
-Docs & License: https://fullcalendar.io/
+Docs & License: https://fullCalendar.io/
 (c) 2019 Adam Shaw
 */
 
-import { config, elementClosest, EmitterMixin, applyStyle, whenTransitionDone, removeElement, ScrollController, ElementScrollController, computeInnerRect, WindowScrollController, preventSelection, preventContextMenu, allowSelection, allowContextMenu, ElementDragging, computeRect, getClippingParents, pointInsideRect, isDateSpansEqual, constrainPoint, intersectRects, getRectCenter, diffPoints, mapHash, rangeContainsRange, interactionSettingsToStore, Interaction, enableCursor, disableCursor, compareNumbers, getElSeg, getRelevantEvents, EventApi, createEmptyEventStore, applyMutationToEventStore, interactionSettingsStore, startOfDay, diffDates, createDuration, eventTupleToStore, isInteractionValid, parseDragMeta, elementMatches, parseEventDef, createEventInstance, globalDefaults, createPlugin } from '@fullcalendar/core';
+import { config, elementClosest, EmitterMixin, applyStyle, whenTransitionDone, removeElement, ScrollController, ElementScrollController, computeInnerRect, WindowScrollController, preventSelection, preventContextMenu, allowSelection, allowContextMenu, ElementDragging, computeRect, getClippingParents, pointInsideRect, isDateSpansEqual, constrainPoint, intersectRects, getRectCenter, diffPoints, mapHash, rangeContainsRange, interactionSettingsToStore, Interaction, enableCursor, disableCursor, compareNumbers, getElSeg, getRelevantEvents, EventApi, createEmptyEventStore, applyMutationToEventStore, interactionSettingsStore, startOfDay, diffDates, createDuration, eventTupleToStore, isInteractionValid, parseDragMeta, elementMatches, parseEventDef, createEventInstance, globalDefaults, createPlugin } from '@fullCalendar/core';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -944,7 +944,7 @@ var OffsetTracker = /** @class */ (function () {
     return OffsetTracker;
 }());
 // certain clipping containers should never constrain interactions, like <html> and <body>
-// https://github.com/fullcalendar/fullcalendar/issues/3615
+// https://github.com/fullCalendar/fullCalendar/issues/3615
 function isIgnoredClipping(node) {
     var tagName = node.tagName;
     return tagName === 'HTML' || tagName === 'BODY';
@@ -1126,12 +1126,12 @@ var DateClicking = /** @class */ (function (_super) {
         // won't even fire if moving was ignored
         _this.handleDragEnd = function (ev) {
             var component = _this.component;
-            var _a = component.context, calendar = _a.calendar, view = _a.view;
+            var _a = component.context, Calendar = _a.Calendar, view = _a.view;
             var pointer = _this.dragging.pointer;
             if (!pointer.wasTouchScroll) {
                 var _b = _this.hitDragging, initialHit = _b.initialHit, finalHit = _b.finalHit;
                 if (initialHit && finalHit && isHitsEqual(initialHit, finalHit)) {
-                    calendar.triggerDateClick(initialHit.dateSpan, initialHit.dayEl, view, ev.origEvent);
+                    Calendar.triggerDateClick(initialHit.dateSpan, initialHit.dayEl, view, ev.origEvent);
                 }
             }
         };
@@ -1170,24 +1170,24 @@ var DateSelecting = /** @class */ (function (_super) {
             dragging.delay = ev.isTouch ? getComponentTouchDelay(component) : null;
         };
         _this.handleDragStart = function (ev) {
-            _this.component.context.calendar.unselect(ev); // unselect previous selections
+            _this.component.context.Calendar.unselect(ev); // unselect previous selections
         };
         _this.handleHitUpdate = function (hit, isFinal) {
-            var calendar = _this.component.context.calendar;
+            var Calendar = _this.component.context.Calendar;
             var dragSelection = null;
             var isInvalid = false;
             if (hit) {
-                dragSelection = joinHitsIntoSelection(_this.hitDragging.initialHit, hit, calendar.pluginSystem.hooks.dateSelectionTransformers);
+                dragSelection = joinHitsIntoSelection(_this.hitDragging.initialHit, hit, Calendar.pluginSystem.hooks.dateSelectionTransformers);
                 if (!dragSelection || !_this.component.isDateSelectionValid(dragSelection)) {
                     isInvalid = true;
                     dragSelection = null;
                 }
             }
             if (dragSelection) {
-                calendar.dispatch({ type: 'SELECT_DATES', selection: dragSelection });
+                Calendar.dispatch({ type: 'SELECT_DATES', selection: dragSelection });
             }
             else if (!isFinal) { // only unselect if moved away while dragging
-                calendar.dispatch({ type: 'UNSELECT_DATES' });
+                Calendar.dispatch({ type: 'UNSELECT_DATES' });
             }
             if (!isInvalid) {
                 enableCursor();
@@ -1202,7 +1202,7 @@ var DateSelecting = /** @class */ (function (_super) {
         _this.handlePointerUp = function (pev) {
             if (_this.dragSelection) {
                 // selection is already rendered, so just need to report selection
-                _this.component.context.calendar.triggerDateSelect(_this.dragSelection, pev);
+                _this.component.context.Calendar.triggerDateSelect(_this.dragSelection, pev);
                 _this.dragSelection = null;
             }
         };
@@ -1275,7 +1275,7 @@ var EventDragging = /** @class */ (function (_super) {
             var _a = _this, component = _a.component, dragging = _a.dragging;
             var mirror = dragging.mirror;
             var options = component.context.options;
-            var initialCalendar = component.context.calendar;
+            var initialCalendar = component.context.Calendar;
             var subjectSeg = _this.subjectSeg = getElSeg(ev.subjectEl);
             var eventRange = _this.eventRange = subjectSeg.eventRange;
             var eventInstanceId = eventRange.instance.instanceId;
@@ -1298,7 +1298,7 @@ var EventDragging = /** @class */ (function (_super) {
         };
         _this.handleDragStart = function (ev) {
             var context = _this.component.context;
-            var initialCalendar = context.calendar;
+            var initialCalendar = context.Calendar;
             var eventRange = _this.eventRange;
             var eventInstanceId = eventRange.instance.instanceId;
             if (ev.isTouch) {
@@ -1329,7 +1329,7 @@ var EventDragging = /** @class */ (function (_super) {
             }
             var relevantEvents = _this.relevantEvents;
             var initialHit = _this.hitDragging.initialHit;
-            var initialCalendar = _this.component.context.calendar;
+            var initialCalendar = _this.component.context.Calendar;
             // states based on new hit
             var receivingCalendar = null;
             var mutation = null;
@@ -1343,7 +1343,7 @@ var EventDragging = /** @class */ (function (_super) {
             };
             if (hit) {
                 var receivingComponent = hit.component;
-                receivingCalendar = receivingComponent.context.calendar;
+                receivingCalendar = receivingComponent.context.Calendar;
                 var receivingOptions = receivingComponent.context.options;
                 if (initialCalendar === receivingCalendar ||
                     receivingOptions.editable && receivingOptions.droppable) {
@@ -1393,7 +1393,7 @@ var EventDragging = /** @class */ (function (_super) {
         _this.handleDragEnd = function (ev) {
             if (_this.isDragging) {
                 var context = _this.component.context;
-                var initialCalendar_1 = context.calendar;
+                var initialCalendar_1 = context.Calendar;
                 var initialView = context.view;
                 var _a = _this, receivingCalendar = _a.receivingCalendar, validMutation = _a.validMutation;
                 var eventDef = _this.eventRange.def;
@@ -1412,7 +1412,7 @@ var EventDragging = /** @class */ (function (_super) {
                     }
                 ]);
                 if (validMutation) {
-                    // dropped within same calendar
+                    // dropped within same Calendar
                     if (receivingCalendar === initialCalendar_1) {
                         initialCalendar_1.dispatch({
                             type: 'MERGE_EVENTS',
@@ -1431,7 +1431,7 @@ var EventDragging = /** @class */ (function (_super) {
                                 });
                             }, jsEvent: ev.origEvent, view: initialView });
                         initialCalendar_1.publiclyTrigger('eventDrop', [eventDropArg]);
-                        // dropped in different calendar
+                        // dropped in different Calendar
                     }
                     else if (receivingCalendar) {
                         initialCalendar_1.publiclyTrigger('eventLeave', [
@@ -1494,11 +1494,11 @@ var EventDragging = /** @class */ (function (_super) {
     };
     // render a drag state on the next receivingCalendar
     EventDragging.prototype.displayDrag = function (nextCalendar, state) {
-        var initialCalendar = this.component.context.calendar;
+        var initialCalendar = this.component.context.Calendar;
         var prevCalendar = this.receivingCalendar;
-        // does the previous calendar need to be cleared?
+        // does the previous Calendar need to be cleared?
         if (prevCalendar && prevCalendar !== nextCalendar) {
-            // does the initial calendar need to be cleared?
+            // does the initial Calendar need to be cleared?
             // if so, don't clear all the way. we still need to to hide the affectedEvents
             if (prevCalendar === initialCalendar) {
                 prevCalendar.dispatch({
@@ -1510,7 +1510,7 @@ var EventDragging = /** @class */ (function (_super) {
                         origSeg: state.origSeg
                     }
                 });
-                // completely clear the old calendar if it wasn't the initial
+                // completely clear the old Calendar if it wasn't the initial
             }
             else {
                 prevCalendar.dispatch({ type: 'UNSET_EVENT_DRAG' });
@@ -1521,12 +1521,12 @@ var EventDragging = /** @class */ (function (_super) {
         }
     };
     EventDragging.prototype.clearDrag = function () {
-        var initialCalendar = this.component.context.calendar;
+        var initialCalendar = this.component.context.Calendar;
         var receivingCalendar = this.receivingCalendar;
         if (receivingCalendar) {
             receivingCalendar.dispatch({ type: 'UNSET_EVENT_DRAG' });
         }
-        // the initial calendar might have an dummy drag state from displayDrag
+        // the initial Calendar might have an dummy drag state from displayDrag
         if (initialCalendar !== receivingCalendar) {
             initialCalendar.dispatch({ type: 'UNSET_EVENT_DRAG' });
         }
@@ -1603,22 +1603,22 @@ var EventDragging$1 = /** @class */ (function (_super) {
                 (ev.isTouch && _this.component.props.eventSelection !== eventRange.instance.instanceId));
         };
         _this.handleDragStart = function (ev) {
-            var _a = _this.component.context, calendar = _a.calendar, view = _a.view;
+            var _a = _this.component.context, Calendar = _a.Calendar, view = _a.view;
             var eventRange = _this.eventRange;
-            _this.relevantEvents = getRelevantEvents(calendar.state.eventStore, _this.eventRange.instance.instanceId);
+            _this.relevantEvents = getRelevantEvents(Calendar.state.eventStore, _this.eventRange.instance.instanceId);
             _this.draggingSeg = _this.querySeg(ev);
-            calendar.unselect();
-            calendar.publiclyTrigger('eventResizeStart', [
+            Calendar.unselect();
+            Calendar.publiclyTrigger('eventResizeStart', [
                 {
                     el: _this.draggingSeg.el,
-                    event: new EventApi(calendar, eventRange.def, eventRange.instance),
+                    event: new EventApi(Calendar, eventRange.def, eventRange.instance),
                     jsEvent: ev.origEvent,
                     view: view
                 }
             ]);
         };
         _this.handleHitUpdate = function (hit, isFinal, ev) {
-            var calendar = _this.component.context.calendar;
+            var Calendar = _this.component.context.Calendar;
             var relevantEvents = _this.relevantEvents;
             var initialHit = _this.hitDragging.initialHit;
             var eventInstance = _this.eventRange.instance;
@@ -1632,10 +1632,10 @@ var EventDragging$1 = /** @class */ (function (_super) {
                 origSeg: _this.draggingSeg
             };
             if (hit) {
-                mutation = computeMutation(initialHit, hit, ev.subjectEl.classList.contains('fc-start-resizer'), eventInstance.range, calendar.pluginSystem.hooks.eventResizeJoinTransforms);
+                mutation = computeMutation(initialHit, hit, ev.subjectEl.classList.contains('fc-start-resizer'), eventInstance.range, Calendar.pluginSystem.hooks.eventResizeJoinTransforms);
             }
             if (mutation) {
-                mutatedRelevantEvents = applyMutationToEventStore(relevantEvents, calendar.eventUiBases, mutation, calendar);
+                mutatedRelevantEvents = applyMutationToEventStore(relevantEvents, Calendar.eventUiBases, mutation, Calendar);
                 interaction.mutatedEvents = mutatedRelevantEvents;
                 if (!_this.component.isInteractionValid(interaction)) {
                     isInvalid = true;
@@ -1645,13 +1645,13 @@ var EventDragging$1 = /** @class */ (function (_super) {
                 }
             }
             if (mutatedRelevantEvents) {
-                calendar.dispatch({
+                Calendar.dispatch({
                     type: 'SET_EVENT_RESIZE',
                     state: interaction
                 });
             }
             else {
-                calendar.dispatch({ type: 'UNSET_EVENT_RESIZE' });
+                Calendar.dispatch({ type: 'UNSET_EVENT_RESIZE' });
             }
             if (!isInvalid) {
                 enableCursor();
@@ -1668,13 +1668,13 @@ var EventDragging$1 = /** @class */ (function (_super) {
             }
         };
         _this.handleDragEnd = function (ev) {
-            var _a = _this.component.context, calendar = _a.calendar, view = _a.view;
+            var _a = _this.component.context, Calendar = _a.Calendar, view = _a.view;
             var eventDef = _this.eventRange.def;
             var eventInstance = _this.eventRange.instance;
-            var eventApi = new EventApi(calendar, eventDef, eventInstance);
+            var eventApi = new EventApi(Calendar, eventDef, eventInstance);
             var relevantEvents = _this.relevantEvents;
             var mutatedRelevantEvents = _this.mutatedRelevantEvents;
-            calendar.publiclyTrigger('eventResizeStop', [
+            Calendar.publiclyTrigger('eventResizeStop', [
                 {
                     el: _this.draggingSeg.el,
                     event: eventApi,
@@ -1683,20 +1683,20 @@ var EventDragging$1 = /** @class */ (function (_super) {
                 }
             ]);
             if (_this.validMutation) {
-                calendar.dispatch({
+                Calendar.dispatch({
                     type: 'MERGE_EVENTS',
                     eventStore: mutatedRelevantEvents
                 });
-                calendar.publiclyTrigger('eventResize', [
+                Calendar.publiclyTrigger('eventResize', [
                     {
                         el: _this.draggingSeg.el,
                         startDelta: _this.validMutation.startDelta || createDuration(0),
                         endDelta: _this.validMutation.endDelta || createDuration(0),
                         prevEvent: eventApi,
                         event: new EventApi(// the data AFTER the mutation
-                        calendar, mutatedRelevantEvents.defs[eventDef.defId], eventInstance ? mutatedRelevantEvents.instances[eventInstance.instanceId] : null),
+                        Calendar, mutatedRelevantEvents.defs[eventDef.defId], eventInstance ? mutatedRelevantEvents.instances[eventInstance.instanceId] : null),
                         revert: function () {
-                            calendar.dispatch({
+                            Calendar.dispatch({
                                 type: 'MERGE_EVENTS',
                                 eventStore: relevantEvents
                             });
@@ -1707,7 +1707,7 @@ var EventDragging$1 = /** @class */ (function (_super) {
                 ]);
             }
             else {
-                calendar.publiclyTrigger('_noEventResize');
+                Calendar.publiclyTrigger('_noEventResize');
             }
             // reset all internal state
             _this.draggingSeg = null;
@@ -1767,7 +1767,7 @@ function computeMutation(hit0, hit1, isFromStart, instanceRange, transforms) {
 }
 
 var UnselectAuto = /** @class */ (function () {
-    function UnselectAuto(calendar) {
+    function UnselectAuto(Calendar) {
         var _this = this;
         this.isRecentPointerDateSelect = false; // wish we could use a selector to detect date selection, but uses hit system
         this.onSelect = function (selectInfo) {
@@ -1776,28 +1776,28 @@ var UnselectAuto = /** @class */ (function () {
             }
         };
         this.onDocumentPointerUp = function (pev) {
-            var _a = _this, calendar = _a.calendar, documentPointer = _a.documentPointer;
-            var state = calendar.state;
+            var _a = _this, Calendar = _a.Calendar, documentPointer = _a.documentPointer;
+            var state = Calendar.state;
             // touch-scrolling should never unfocus any type of selection
             if (!documentPointer.wasTouchScroll) {
                 if (state.dateSelection && // an existing date selection?
                     !_this.isRecentPointerDateSelect // a new pointer-initiated date selection since last onDocumentPointerUp?
                 ) {
-                    var unselectAuto = calendar.viewOpt('unselectAuto');
-                    var unselectCancel = calendar.viewOpt('unselectCancel');
+                    var unselectAuto = Calendar.viewOpt('unselectAuto');
+                    var unselectCancel = Calendar.viewOpt('unselectCancel');
                     if (unselectAuto && (!unselectAuto || !elementClosest(documentPointer.downEl, unselectCancel))) {
-                        calendar.unselect(pev);
+                        Calendar.unselect(pev);
                     }
                 }
                 if (state.eventSelection && // an existing event selected?
                     !elementClosest(documentPointer.downEl, EventDragging.SELECTOR) // interaction DIDN'T start on an event
                 ) {
-                    calendar.dispatch({ type: 'UNSELECT_EVENT' });
+                    Calendar.dispatch({ type: 'UNSELECT_EVENT' });
                 }
             }
             _this.isRecentPointerDateSelect = false;
         };
-        this.calendar = calendar;
+        this.Calendar = Calendar;
         var documentPointer = this.documentPointer = new PointerDragging(document);
         documentPointer.shouldIgnoreMove = true;
         documentPointer.shouldWatchScroll = false;
@@ -1805,10 +1805,10 @@ var UnselectAuto = /** @class */ (function () {
         /*
         TODO: better way to know about whether there was a selection with the pointer
         */
-        calendar.on('select', this.onSelect);
+        Calendar.on('select', this.onSelect);
     }
     UnselectAuto.prototype.destroy = function () {
-        this.calendar.off('select', this.onSelect);
+        this.Calendar.off('select', this.onSelect);
         this.documentPointer.destroy();
     };
     return UnselectAuto;
@@ -1817,7 +1817,7 @@ var UnselectAuto = /** @class */ (function () {
 /*
 Given an already instantiated draggable object for one-or-more elements,
 Interprets any dragging as an attempt to drag an events that lives outside
-of a calendar onto a calendar.
+of a Calendar onto a Calendar.
 */
 var ExternalElementDragging = /** @class */ (function () {
     function ExternalElementDragging(dragging, suppliedDragMeta) {
@@ -1841,7 +1841,7 @@ var ExternalElementDragging = /** @class */ (function () {
                 origSeg: null
             };
             if (hit) {
-                receivingCalendar = hit.component.context.calendar;
+                receivingCalendar = hit.component.context.Calendar;
                 if (_this.canDropElOnCalendar(ev.subjectEl, receivingCalendar)) {
                     droppableEvent = computeEventForDateSpan(hit.dateSpan, _this.dragMeta, receivingCalendar);
                     interaction.mutatedEvents = eventTupleToStore(droppableEvent);
@@ -1947,23 +1947,23 @@ var ExternalElementDragging = /** @class */ (function () {
 }());
 // Utils for computing event store from the DragMeta
 // ----------------------------------------------------------------------------------------------------
-function computeEventForDateSpan(dateSpan, dragMeta, calendar) {
+function computeEventForDateSpan(dateSpan, dragMeta, Calendar) {
     var defProps = __assign({}, dragMeta.leftoverProps);
-    for (var _i = 0, _a = calendar.pluginSystem.hooks.externalDefTransforms; _i < _a.length; _i++) {
+    for (var _i = 0, _a = Calendar.pluginSystem.hooks.externalDefTransforms; _i < _a.length; _i++) {
         var transform = _a[_i];
         __assign(defProps, transform(dateSpan, dragMeta));
     }
-    var def = parseEventDef(defProps, dragMeta.sourceId, dateSpan.allDay, calendar.opt('forceEventDuration') || Boolean(dragMeta.duration), // hasEnd
-    calendar);
+    var def = parseEventDef(defProps, dragMeta.sourceId, dateSpan.allDay, Calendar.opt('forceEventDuration') || Boolean(dragMeta.duration), // hasEnd
+    Calendar);
     var start = dateSpan.range.start;
     // only rely on time info if drop zone is all-day,
     // otherwise, we already know the time
     if (dateSpan.allDay && dragMeta.startTime) {
-        start = calendar.dateEnv.add(start, dragMeta.startTime);
+        start = Calendar.dateEnv.add(start, dragMeta.startTime);
     }
     var end = dragMeta.duration ?
-        calendar.dateEnv.add(start, dragMeta.duration) :
-        calendar.getDefaultEventEnd(dateSpan.allDay, start);
+        Calendar.dateEnv.add(start, dragMeta.duration) :
+        Calendar.getDefaultEventEnd(dateSpan.allDay, start);
     var instance = createEventInstance(def.defId, { start: start, end: end });
     return { def: def, instance: instance };
 }
@@ -1984,8 +1984,8 @@ function getEmbeddedElData(el, name) {
 }
 
 /*
-Makes an element (that is *external* to any calendar) draggable.
-Can pass in data that determines how an event will be created when dropped onto a calendar.
+Makes an element (that is *external* to any Calendar) draggable.
+Can pass in data that determines how an event will be created when dropped onto a Calendar.
 Leverages FullCalendar's internal drag-n-drop functionality WITHOUT a third-party drag system.
 */
 var ExternalDraggable = /** @class */ (function () {
@@ -2133,7 +2133,7 @@ var ThirdPartyDraggable = /** @class */ (function () {
 
 var main = createPlugin({
     componentInteractions: [DateClicking, DateSelecting, EventDragging, EventDragging$1],
-    calendarInteractions: [UnselectAuto],
+    CalendarInteractions: [UnselectAuto],
     elementDraggingImpl: FeaturefulElementDragging
 });
 

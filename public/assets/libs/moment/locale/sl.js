@@ -106,7 +106,7 @@
             LLL : 'D. MMMM YYYY H:mm',
             LLLL : 'dddd, D. MMMM YYYY H:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay  : '[danes ob] LT',
             nextDay  : '[jutri ob] LT',
 

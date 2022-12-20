@@ -1,11 +1,11 @@
 /*!
 FullCalendar Time Grid Plugin v4.4.2
-Docs & License: https://fullcalendar.io/
+Docs & License: https://fullCalendar.io/
 (c) 2019 Adam Shaw
 */
 
-import { createFormatter, removeElement, computeEventDraggable, computeEventStartResizable, computeEventEndResizable, cssToStr, isMultiDayRange, htmlEscape, compareByFieldSpecs, applyStyle, FgEventRenderer, buildSegCompareObj, FillRenderer, memoize, memoizeRendering, createDuration, wholeDivideDurations, findElements, PositionCache, startOfDay, asRoughMs, formatIsoTimeString, addDurations, htmlToElement, createElement, multiplyDuration, DateComponent, hasBgRendering, Splitter, diffDays, buildGotoAnchorHtml, getAllDayHtml, ScrollComponent, matchCellWidths, uncompensateScroll, compensateScroll, subtractInnerElHeight, View, intersectRanges, Slicer, DayHeader, DaySeries, DayTable, createPlugin } from '@fullcalendar/core';
-import { DayBgRow, DayGrid, SimpleDayGrid } from '@fullcalendar/daygrid';
+import { createFormatter, removeElement, computeEventDraggable, computeEventStartResizable, computeEventEndResizable, cssToStr, isMultiDayRange, htmlEscape, compareByFieldSpecs, applyStyle, FgEventRenderer, buildSegCompareObj, FillRenderer, memoize, memoizeRendering, createDuration, wholeDivideDurations, findElements, PositionCache, startOfDay, asRoughMs, formatIsoTimeString, addDurations, htmlToElement, createElement, multiplyDuration, DateComponent, hasBgRendering, Splitter, diffDays, buildGotoAnchorHtml, getAllDayHtml, ScrollComponent, matchCellWidths, uncompensateScroll, compensateScroll, subtractInnerElHeight, View, intersectRanges, Slicer, DayHeader, DaySeries, DayTable, createPlugin } from '@fullCalendar/core';
+import { DayBgRow, DayGrid, SimpleDayGrid } from '@fullCalendar/daygrid';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -204,8 +204,8 @@ var TimeGridEventRenderer = /** @class */ (function (_super) {
         }
     };
     // Calculate seg.forwardCoord and seg.backwardCoord for the segment, where both values range
-    // from 0 to 1. If the calendar is left-to-right, the seg.backwardCoord maps to "left" and
-    // seg.forwardCoord maps to "right" (via percentage). Vice-versa if the calendar is right-to-left.
+    // from 0 to 1. If the Calendar is left-to-right, the seg.backwardCoord maps to "left" and
+    // seg.forwardCoord maps to "right" (via percentage). Vice-versa if the Calendar is right-to-left.
     //
     // The segment might be part of a "series", which means consecutive segments with the same pressure
     // who's width is unknown until an edge has been hit. `seriesBackwardPressure` is the number of
@@ -302,8 +302,8 @@ var TimeGridEventRenderer = /** @class */ (function (_super) {
     };
     return TimeGridEventRenderer;
 }(FgEventRenderer));
-// Builds an array of segments "levels". The first level will be the leftmost tier of segments if the calendar is
-// left-to-right, or the rightmost if the calendar is right-to-left. Assumes the segments are already ordered by date.
+// Builds an array of segments "levels". The first level will be the leftmost tier of segments if the Calendar is
+// left-to-right, or the rightmost if the Calendar is right-to-left. Assumes the segments are already ordered by date.
 function buildSlotSegLevels(segs) {
     var levels = [];
     var i;
@@ -625,7 +625,7 @@ var TimeGrid = /** @class */ (function (_super) {
         return html;
     };
     TimeGrid.prototype._renderColumns = function (cells, dateProfile) {
-        var _a = this.context, calendar = _a.calendar, view = _a.view, isRtl = _a.isRtl, theme = _a.theme, dateEnv = _a.dateEnv;
+        var _a = this.context, Calendar = _a.Calendar, view = _a.view, isRtl = _a.isRtl, theme = _a.theme, dateEnv = _a.dateEnv;
         var bgRow = new DayBgRow(this.context);
         this.rootBgContainerEl.innerHTML =
             '<table class="' + theme.getClass('tableGrid') + '">' +
@@ -637,7 +637,7 @@ var TimeGrid = /** @class */ (function (_super) {
                 '</table>';
         this.colEls = findElements(this.el, '.fc-day, .fc-disabled-day');
         for (var col = 0; col < this.colCnt; col++) {
-            calendar.publiclyTrigger('dayRender', [
+            Calendar.publiclyTrigger('dayRender', [
                 {
                     date: dateEnv.toDate(cells[col].date),
                     el: this.colEls[col],
@@ -1231,13 +1231,13 @@ var SimpleTimeGrid = /** @class */ (function (_super) {
         return _this;
     }
     SimpleTimeGrid.prototype.firstContext = function (context) {
-        context.calendar.registerInteractiveComponent(this, {
+        context.Calendar.registerInteractiveComponent(this, {
             el: this.timeGrid.el
         });
     };
     SimpleTimeGrid.prototype.destroy = function () {
         _super.prototype.destroy.call(this);
-        this.context.calendar.unregisterInteractiveComponent(this);
+        this.context.Calendar.unregisterInteractiveComponent(this);
     };
     SimpleTimeGrid.prototype.render = function (props, context) {
         var dateEnv = this.context.dateEnv;
@@ -1245,7 +1245,7 @@ var SimpleTimeGrid = /** @class */ (function (_super) {
         var dayRanges = this.dayRanges = this.buildDayRanges(dayTable, dateProfile, dateEnv);
         var timeGrid = this.timeGrid;
         timeGrid.receiveContext(context); // hack because context is used in sliceProps
-        timeGrid.receiveProps(__assign({}, this.slicer.sliceProps(props, dateProfile, null, context.calendar, timeGrid, dayRanges), { dateProfile: dateProfile, cells: dayTable.cells[0] }), context);
+        timeGrid.receiveProps(__assign({}, this.slicer.sliceProps(props, dateProfile, null, context.Calendar, timeGrid, dayRanges), { dateProfile: dateProfile, cells: dayTable.cells[0] }), context);
     };
     SimpleTimeGrid.prototype.renderNowIndicator = function (date) {
         this.timeGrid.renderNowIndicator(this.slicer.sliceNowDate(date, this.timeGrid, this.dayRanges), date);

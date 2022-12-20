@@ -47,7 +47,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'dddd, D MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Имрӯз соати] LT',
             nextDay : '[Пагоҳ соати] LT',
             lastDay : '[Дирӯз соати] LT',

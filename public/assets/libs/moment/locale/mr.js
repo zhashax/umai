@@ -86,7 +86,7 @@
             LLL : 'D MMMM YYYY, A h:mm वाजता',
             LLLL : 'dddd, D MMMM YYYY, A h:mm वाजता'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[आज] LT',
             nextDay : '[उद्या] LT',
             nextWeek : 'dddd, LT',

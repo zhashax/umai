@@ -31,7 +31,7 @@
             LLLL : 'dddd D MMMM [de] YYYY [a les] H:mm',
             llll : 'ddd D MMM YYYY, H:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : function () {
                 return '[avui a ' + ((this.hours() !== 1) ? 'les' : 'la') + '] LT';
             },

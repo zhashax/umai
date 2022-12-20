@@ -67,7 +67,7 @@
             LLL : 'D [a viz] MMMM YYYY h[e]mm A',
             LLLL : 'dddd, D [a viz] MMMM YYYY h[e]mm A'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Hiziv da] LT',
             nextDay : '[Warc\'hoazh da] LT',
             nextWeek : 'dddd [da] LT',

@@ -9,7 +9,7 @@ class StudentController extends Controller
 {
     public function index(){
         $user = User::all();
-        return view('user.widgets.add_student',['user'=>$user]);
+        return view('admin.students',['user'=>$user]);
     }
     public function store_student(Request $request){
         $student = new Student;

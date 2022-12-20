@@ -57,7 +57,7 @@
                 return 'މފ';
             }
         },
-        calendar : {
+        Calendar : {
             sameDay : '[މިއަދު] LT',
             nextDay : '[މާދަމާ] LT',
             nextWeek : 'dddd LT',

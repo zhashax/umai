@@ -62,7 +62,7 @@
                 return 'ល្ងាច';
             }
         },
-        calendar: {
+        Calendar: {
             sameDay: '[ថ្ងៃនេះ ម៉ោង] LT',
             nextDay: '[ស្អែក ម៉ោង] LT',
             nextWeek: 'dddd [ម៉ោង] LT',

@@ -30,7 +30,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'dddd, D MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[Sot në] LT',
             nextDay : '[Nesër në] LT',
             nextWeek : 'dddd [në] LT',

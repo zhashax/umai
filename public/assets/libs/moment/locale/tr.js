@@ -41,7 +41,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'dddd, D MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[bugün saat] LT',
             nextDay : '[yarın saat] LT',
             nextWeek : '[gelecek] dddd [saat] LT',

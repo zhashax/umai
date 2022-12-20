@@ -22,7 +22,7 @@
             LLL : 'MMMM D, YYYY HH:mm',
             LLLL : 'dddd, MMMM DD, YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay: 'LT [ngayong araw]',
             nextDay: '[Bukas ng] LT',
             nextWeek: 'LT [sa susunod na] dddd',

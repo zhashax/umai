@@ -23,7 +23,7 @@
             LLL : 'D MMMM YYYY HH:mm',
             LLLL : 'dddd, D MMMM YYYY HH:mm'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[leo saa] LT',
             nextDay : '[kesho saa] LT',
             nextWeek : '[wiki ijayo] dddd [saat] LT',

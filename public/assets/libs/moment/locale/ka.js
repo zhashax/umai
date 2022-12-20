@@ -29,7 +29,7 @@
             LLL : 'D MMMM YYYY h:mm A',
             LLLL : 'dddd, D MMMM YYYY h:mm A'
         },
-        calendar : {
+        Calendar : {
             sameDay : '[დღეს] LT[-ზე]',
             nextDay : '[ხვალ] LT[-ზე]',
             lastDay : '[გუშინ] LT[-ზე]',

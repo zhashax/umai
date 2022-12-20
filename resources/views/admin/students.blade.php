@@ -1,22 +1,35 @@
+@extends('layouts.app')
+
+@section('title')
+    Calendar | Admin Panel
+@endsection
+
+@section('content')
 <!doctype html>
 <html lang="en">
 
     <head>
         
         <meta charset="utf-8" />
-        <title>Jquery Knob Charts | Umai - Admin & Dashboard Template</title>
+        <title>Calendar | Umai - Admin & Dashboard Template</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesdesign" name="author" />
+        <meta content="Admin & Dashboard Template" name="description" />
+        <meta content="Zhas" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
+        <!-- Plugin css -->
+        <link rel="stylesheet" href="{{ asset('assets/libs/@fullCalendar/core/main.min.css')}}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('assets/libs/@fullCalendar/daygrid/main.min.css')}}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('assets/libs/@fullCalendar/bootstrap/main.min.css')}}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('assets/libs/@fullCalendar/timegrid/main.min.css')}}" type="text/css">
+    
         <!-- Bootstrap Css -->
-        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -35,19 +48,19 @@
                         <div class="navbar-brand-box">
                             <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm" height="22">
+                                    <img src="{{ asset('assets/images/logo-sm.png')}}" alt="logo-sm" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-dark.png" alt="logo-dark" height="20">
+                                    <img src="{{ asset('assets/images/logo-dark.png')}}" alt="logo-dark" height="20">
                                 </span>
                             </a>
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm-light" height="22">
+                                    <img src="{{ asset('assets/images/logo-sm.png')}}" alt="logo-sm-light" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-light.png" alt="logo-light" height="20">
+                                    <img src="{{ asset('assets/images/logo-light.png')}}" alt="logo-light" height="20">
                                 </span>
                             </a>
                         </div>
@@ -185,7 +198,7 @@
 
                                             <div class="col-sm-5">
                                                 <div>
-                                                    <img src="assets/images/megamenu-img.png" alt="megamenu-img" class="img-fluid mx-auto d-block">
+                                                    <img src="{{ asset('assets/images/megamenu-img.png')}}" alt="megamenu-img" class="img-fluid mx-auto d-block">
                                                 </div>
                                             </div>
                                         </div>
@@ -198,107 +211,8 @@
 
                     <div class="d-flex">
 
-                        <div class="dropdown d-inline-block d-lg-none ms-2">
-                            <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ri-search-line"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                                aria-labelledby="page-header-search-dropdown">
-                    
-                                <form class="p-3">
-                                    <div class="mb-3 m-0">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search ...">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit"><i class="ri-search-line"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        
 
-                        <div class="dropdown d-none d-sm-inline-block">
-                            <button type="button" class="btn header-item waves-effect"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="" src="assets/images/flags/us.jpg" alt="Header Language" height="16">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end">
-                    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="dropdown d-none d-lg-inline-block ms-1">
-                            <button type="button" class="btn header-item noti-icon waves-effect"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ri-apps-2-line"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                                <div class="px-lg-2">
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="assets/images/brands/github.png" alt="Github">
-                                                <span>GitHub</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="assets/images/brands/bitbucket.png" alt="bitbucket">
-                                                <span>Bitbucket</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="assets/images/brands/dribbble.png" alt="dribbble">
-                                                <span>Dribbble</span>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="assets/images/brands/dropbox.png" alt="dropbox">
-                                                <span>Dropbox</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="assets/images/brands/mail_chimp.png" alt="mail_chimp">
-                                                <span>Mail Chimp</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="assets/images/brands/slack.png" alt="slack">
-                                                <span>Slack</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="dropdown d-none d-lg-inline-block ms-1">
                             <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
@@ -306,101 +220,13 @@
                             </button>
                         </div>
 
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
-                                  data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-notification-3-line"></i>
-                                <span class="noti-dot"></span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                                aria-labelledby="page-header-notifications-dropdown">
-                                <div class="p-3">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="m-0"> Notifications </h6>
-                                        </div>
-                                        <div class="col-auto">
-                                            <a href="#!" class="small"> View All</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div data-simplebar style="max-height: 230px;">
-                                    <a href="" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                    <i class="ri-shopping-cart-line"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-1">
-                                                <h6 class="mb-1">Your order is placed</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">If several languages coalesce the grammar</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <img src="assets/images/users/avatar-3.jpg"
-                                                class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                            <div class="flex-1">
-                                                <h6 class="mb-1">James Lemire</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">It will seem like simplified English.</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-success rounded-circle font-size-16">
-                                                    <i class="ri-checkbox-circle-line"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-1">
-                                                <h6 class="mb-1">Your item is shipped</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">If several languages coalesce the grammar</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <img src="assets/images/users/avatar-4.jpg"
-                                                class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                            <div class="flex-1">
-                                                <h6 class="mb-1">Salena Layfield</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="p-2 border-top">
-                                    <div class="d-grid">
-                                        <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
-                                            <i class="mdi mdi-arrow-right-circle me-1"></i> View More..
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="dropdown d-inline-block user-dropdown">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
+                                <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-1.jpg')}}"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1">Julia</span>
+                                <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()->name }}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -432,7 +258,7 @@
                     <!-- User details -->
                     <div class="user-profile text-center mt-3">
                         <div class="">
-                            <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle">
+                            <img src="{{ asset('assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-md rounded-circle">
                         </div>
                         <div class="mt-3">
                             <h4 class="font-size-16 mb-1">Julia Hudda</h4>
@@ -447,16 +273,16 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="index.html" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i><span class="badge rounded-pill bg-success float-end">3</span>
+                                <a href="{{ route('admin.view') }}" class="waves-effect">
+                                    <i class="ri-dashboard-line"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="Calendar.html" class=" waves-effect">
+                                <a href="{{ route('user.students') }}" class=" waves-effect">
                                     <i class="ri-Calendar-2-line"></i>
-                                    <span>Calendar</span>
+                                    <span>Students</span>
                                 </a>
                             </li>
                 
@@ -673,105 +499,7 @@
             <!-- ============================================================== -->
             <div class="main-content">
 
-                <div class="page-content">
-                    <div class="container-fluid">
-
-                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">Jquery Knob Charts</h4>
-
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Charts</a></li>
-                                            <li class="breadcrumb-item active">Jquery Knob Charts</li>
-                                        </ol>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end page title -->
-                        
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-        
-                                        <h4 class="card-title">Examples</h4>
-                                        <p class="card-title-desc">Nice, downward compatible, touchable, jQuery dial</p>
-        
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-center" dir="ltr">
-                                                    <h5 class="font-size-14 mb-3">Disable display input</h5>
-                                                    <input class="knob" data-width="150" data-fgcolor="#5664d2" data-displayinput="false" value="35">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="text-center" dir="ltr">
-                                                    <h5 class="font-size-14 mb-3">Cursor mode</h5>
-                                                    <input class="knob" data-width="150" data-cursor="true" data-fgcolor="#ff3d60" value="29">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="text-center" dir="ltr">
-                                                    <h5 class="font-size-14 mb-3">Display previous value</h5>
-                                                    <input class="knob" data-width="150" data-min="-100" data-fgcolor="#fcb92c" data-displayprevious="true" value="44">
-                                                </div>
-                                            </div>
-                                        </div>
-        
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-center" dir="ltr">
-                                                    <h5 class="font-size-14 mb-3">Angle offset</h5>
-                                                    <input class="knob" data-width="150" data-angleoffset="90" data-linecap="round" data-fgcolor="#4aa3ff" value="35">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="text-center" dir="ltr">
-                                                    <h5 class="font-size-14 mb-3"> 5-digit values, step 1000</h5>
-                                                    <input class="knob" data-width="150" data-min="-15000" data-displayprevious="true" data-max="15000" data-step="1000" value="-11000" data-fgcolor="#343a40">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="text-center" dir="ltr">
-                                                    <h5 class="font-size-14 mb-3">Angle offset and arc</h5>
-                                                    <input class="knob" data-width="150" data-cursor="true" data-fgcolor="#1cbb8c" value="29">
-                                                </div>
-                                            </div>
-                                        </div>
-        
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-center" dir="ltr">
-                                                    <h5 class="font-size-14 mb-3">Readonly</h5>
-                                                    <input class="knob" data-width="150" data-height="150" data-linecap=round
-                                                            data-fgColor="#f06292" value="80" data-skin="tron" data-angleOffset="180"
-                                                            data-readOnly=true data-thickness=".1"/>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="text-center" dir="ltr">
-                                                    <h5 class="font-size-14 mb-3"> Angle offset and arc</h5>
-                                                    <input class="knob" data-width="150" data-height="150"
-                                                    data-displayPrevious=true data-fgColor="#8d6e63" data-skin="tron"
-                                                    data-cursor=true value="75" data-thickness=".2" data-angleOffset=-125
-                                                    data-angleArc=250 value="44"/>
-                                                </div>
-        
-                                            </div>
-                                        </div>
-        
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                        </div> <!-- end row -->
-                    </div> <!-- container-fluid -->
-                </div>
+                
                 <!-- End Page-content -->
                 
                 <footer class="footer">
@@ -813,7 +541,7 @@
 
                 <div class="p-4">
                     <div class="mb-2">
-                        <img src="assets/images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="layout-1">
+                        <img src="{{ asset('assets/images/layouts/layout-1.jpg')}}" class="img-fluid img-thumbnail" alt="layout-1">
                     </div>
 
                     <div class="form-check form-switch mb-3">
@@ -822,18 +550,18 @@
                     </div>
     
                     <div class="mb-2">
-                        <img src="assets/images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="layout-2">
+                        <img src="{{ asset('assets/images/layouts/layout-2.jpg')}}" class="img-fluid img-thumbnail" alt="layout-2">
                     </div>
                     <div class="form-check form-switch mb-3">
-                        <input class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css">
+                        <input class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch" data-bsStyle="{{ asset('assets/css/bootstrap-dark.min.css')}}" data-appStyle="{{ asset('assets/css/app-dark.min.css')}}">
                         <label class="form-check-label" for="dark-mode-switch">Dark Mode</label>
                     </div>
     
                     <div class="mb-2">
-                        <img src="assets/images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="layout-3">
+                        <img src="{{ asset('assets/images/layouts/layout-3.jpg')}}" class="img-fluid img-thumbnail" alt="layout-3">
                     </div>
                     <div class="form-check form-switch mb-5">
-                        <input class="form-check-input theme-choice" type="checkbox" id="rtl-mode-switch" data-appStyle="assets/css/app-rtl.min.css">
+                        <input class="form-check-input theme-choice" type="checkbox" id="rtl-mode-switch" data-appStyle="{{ asset('assets/css/app-rtl.min.css')}}">
                         <label class="form-check-label" for="rtl-mode-switch">RTL Mode</label>
                     </div>
 
@@ -848,17 +576,26 @@
         <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
-        <script src="assets/libs/jquery/jquery.min.js"></script>
-        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="assets/libs/node-waves/waves.min.js"></script>
+        <script src="{{ asset('assets/libs/jquery/jquery.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/node-waves/waves.min.js')}}"></script>
 
-        <script src="assets/libs/jquery-knob/jquery.knob.min.js"></script> 
+        <!-- plugin js -->
+        <script src="{{ asset('assets/libs/moment/min/moment.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/jquery-ui-dist/jquery-ui.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/@fullCalendar/core/main.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/@fullCalendar/bootstrap/main.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/@fullCalendar/daygrid/main.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/@fullCalendar/timegrid/main.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/@fullCalendar/interaction/main.min.js')}}"></script>
 
-        <script src="assets/js/pages/jquery-knob.init.js"></script> 
+        <!-- Calendar init -->
+        <script src="{{ asset('assets/js/pages/Calendar.init.js')}}"></script>
 
-        <script src="assets/js/app.js"></script>
+        <script src="{{ asset('assets/js/app.js')}}"></script>
 
     </body>
 </html>
+@endsection

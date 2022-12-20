@@ -36,7 +36,7 @@
             LLL: 'D MMMM YYYY HH:mm',
             LLLL: 'dddd, D MMMM YYYY HH:mm'
         },
-        calendar: {
+        Calendar: {
             sameDay: '[Inniu ag] LT',
             nextDay: '[Amárach ag] LT',
             nextWeek: 'dddd [ag] LT',

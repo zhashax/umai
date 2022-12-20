@@ -61,7 +61,7 @@
                 return 'كەچ';
             }
         },
-        calendar: {
+        Calendar: {
             sameDay: '[بۈگۈن سائەت] LT',
             nextDay: '[ئەتە سائەت] LT',
             nextWeek: '[كېلەركى] dddd [سائەت] LT',
