@@ -46,21 +46,21 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="{{ route('admin.view') }}" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="{{ asset('assets/images/logo-sm.png')}}" alt="logo-sm" height="22">
+                                    {{ config('app.name') }}
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="{{ asset('assets/images/logo-dark.png')}}" alt="logo-dark" height="20">
+                                    {{ config('app.name') }}
                                 </span>
                             </a>
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="{{ asset('assets/images/logo-sm.png')}}" alt="logo-sm-light" height="22">
+                                    {{ config('app.name') }}
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="{{ asset('assets/images/logo-light.png')}}" alt="logo-light" height="20">
+                                    {{ config('app.name') }}
                                 </span>
                             </a>
                         </div>
@@ -77,136 +77,6 @@
                             </div>
                         </form>
 
-                        <div class="dropdown dropdown-mega d-none d-lg-block ms-2">
-                            <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                                Mega Menu
-                                <i class="mdi mdi-chevron-down"></i> 
-                            </button>
-                            <div class="dropdown-menu dropdown-megamenu">
-                                <div class="row">
-                                    <div class="col-sm-8">
-                
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <h5 class="font-size-14">UI Components</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);">Lightbox</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Range Slider</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Sweet Alert</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Rating</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Forms</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Tables</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Charts</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <h5 class="font-size-14">Applications</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);">Ecommerce</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Calendar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Email</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Tasks</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Contacts</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <h5 class="font-size-14">Extra Pages</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);">Light Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Compact Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Horizontal layout</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Maintenance</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Coming Soon</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Timeline</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">FAQs</a>
-                                                    </li>
-                                        
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <h5 class="font-size-14">UI Components</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);">Lightbox</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Range Slider</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Sweet Alert</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Rating</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Forms</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Tables</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">Charts</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-sm-5">
-                                                <div>
-                                                    <img src="{{ asset('assets/images/megamenu-img.png')}}" alt="megamenu-img" class="img-fluid mx-auto d-block">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
                     </div>
 
                     <div class="d-flex">
@@ -226,7 +96,7 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-1.jpg')}}"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()->name }}</span>
+                                <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()?Auth::user()->name :Auth::guest()."guest" }}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -261,7 +131,7 @@
                             <img src="{{ asset('assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-md rounded-circle">
                         </div>
                         <div class="mt-3">
-                            <h4 class="font-size-16 mb-1">Julia Hudda</h4>
+                            <h4 class="font-size-16 mb-1">{{ Auth::user()? Auth::user()->name:Auth::guest() }}</h4>
                             <span class="text-muted"><i class="ri-record-circle-line align-middle font-size-14 text-success"></i> Online</span>
                         </div>
                     </div>
@@ -499,7 +369,73 @@
             <!-- ============================================================== -->
             <div class="main-content">
 
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">Data Tables</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                            <li class="breadcrumb-item active">Data Tables</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        
+                            
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Address</th>
+                                                <th>email</th>
+                                                <th>sex</th>
+                                                <th>mobile</th>
+                                                <th>class</th>
+                                            </tr>
+                                            </thead>
+        
+        
+                                            <tbody>
+                                             @foreach ($students as $student)
+                                             <tr>
+                                               <td>{{ $student['fullname'] }}</td> 
+                                               <td>{{ $student['address'] }}</td> 
+                                               <td>{{ $student['email'] }}</td> 
+                                               <td>{{ $student['sex'] }}</td> 
+                                               <td>{{ $student['mobile'] }}</td> 
+                                               <td>{{ $student['class'] }}</td> 
+                                             </tr>  
+                                             @endforeach   
+                                        
+                                            </tbody>
+                                        </table>
+        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+        
+
+                        
+                    </div> <!-- container-fluid -->
+                </div>
                 
+            
                 <!-- End Page-content -->
                 
                 <footer class="footer">

@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     public function index(){
+        $students = Student::all();
         $user = User::all();
-        return view('admin.students',['user'=>$user]);
+        return view('admin.students',['user'=>$user],['students'=>$students]);
     }
     public function store_student(Request $request){
         $student = new Student;
