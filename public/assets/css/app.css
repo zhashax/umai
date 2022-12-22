@@ -13,6 +13,7 @@ File: Main Css File
   font-display: swap;
   src: url("../fonts/inter-light.woff2?v=3.13") format("woff2"), url("../fonts/inter-light.woff?v=3.13") format("woff");
 }
+
 @font-face {
   font-family: "Inter";
   font-style: normal;
@@ -61,6 +62,13 @@ File: Main Css File
 }
 .navbar-header .dropdown .show.header-item {
   background-color: #fafafa;
+}
+
+.add_student{
+  display: grid;
+  grid-template-columns: auto 25%;
+  /*grid-template-columns: auto 300px;*/
+  grid-column-gap: 30px;
 }
 
 .navbar-brand-box {

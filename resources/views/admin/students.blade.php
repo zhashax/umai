@@ -55,7 +55,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="{{ route('admin.view') }}" class="logo logo-light">
                                 <span class="logo-sm">
                                     {{ config('app.name') }}
                                 </span>
@@ -372,16 +372,20 @@
                 <div class="page-content">
                     <div class="container-fluid">
 
+                        <!-- sidebar here -->
+                        <button type="button" onclick="window.location='{{ view('user.widgets.add_student') }}'">+ add student </button>
+                        <br><br>
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">Data Tables</h4>
+                                    <h4 class="mb-sm-0">Ученики</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                            <li class="breadcrumb-item active">Data Tables</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Таблицы</a></li>
+                                            <li class="breadcrumb-item active">Таблица Учеников</li>
                                         </ol>
                                     </div>
 
@@ -446,7 +450,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="text-sm-end d-none d-sm-block">
-                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign
+                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by Zhas
                                 </div>
                             </div>
                         </div>

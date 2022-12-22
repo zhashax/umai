@@ -24,7 +24,7 @@ class StudentController extends Controller
         $student->discounts=$request->discounts;
         $student->comment=$request->comment;
         $student->save();
-        return redirect()->route('user.home')->with('status','Студент успешно добавлен!');
+        return redirect()->route('user.students')->with('status','Студент успешно добавлен!');
 
     }
 }

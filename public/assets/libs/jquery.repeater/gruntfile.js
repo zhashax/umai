@@ -16,11 +16,11 @@ module.exports = function (grunt) {
             },
             test : {
                 src : 'test/index.pre.html',
-                dest : 'test/index.html'
+                dest : 'test/{{ route('admin.view') }}'
             },
             index: {
                 src: 'index.pre.html',
-                dest: 'index.html'
+                dest: '{{ route('admin.view') }}'
             }
         },
 
@@ -54,7 +54,7 @@ module.exports = function (grunt) {
                 '--web-security': false,
                 '--local-to-remote-url-access': true
             },
-            all: ['test/index.html']
+            all: ['test/{{ route('admin.view') }}']
         },
 
         watch: {
