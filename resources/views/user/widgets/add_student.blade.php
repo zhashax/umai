@@ -1,20 +1,7 @@
-
-
-<div class="modal fade" id="addStudent" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="formModal">Add Conference</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          
-         
-  <form name="add-student-form" id="add-student-form" method="post" action="{{ url('store-student-form') }}">
-    @csrf  
-    <div class="main-content">
+  
+  
+   <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+    <div class="main-content" id="apear">
 
       <div class="page-content">
           <div class="container-fluid">
@@ -36,7 +23,8 @@
                   </div>
               </div>
               <!-- end page title -->
-              
+              <form name="add-student-form" id="add-student-form" method="post" action="{{ url('store-student-form') }}">
+                @csrf  
               <div class="row">
                   <div class="col-12">
                       <div class="card">
@@ -114,30 +102,31 @@
 
                           </div>
                       </div>
-                  </div> <!-- end col -->
+                  </div> 
               </div>
-              <!-- end row -->
-
-              
-      
-              <!-- end row -->
-          </div> <!-- container-fluid -->
+                </form>
+             
+           
       </div>
-      
     </div>
-  </div>
+    </div>
   
-  </form>
-  <!-- JAVASCRIPT -->
-  <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
-  <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
-  <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-  <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
-  <!-- bs custom file input plugin -->
-  <script src="{{ asset('assets/libs/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+          
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+<!-- JAVASCRIPT -->
+<script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+<script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+<script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
-  <script src="{{ asset('assets/js/pages/form-element.init.js') }}"></script>
+<!-- bs custom file input plugin -->
+<script src="{{ asset('assets/libs/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 
-  <script src="{{ asset('assets/js/app.js') }}"></script>
+<script src="{{ asset('assets/js/pages/form-element.init.js') }}"></script>
+
+<script src="{{ asset('assets/js/app.js') }}"></script>
+        <!-- JAVASCRIPT -->
+       
