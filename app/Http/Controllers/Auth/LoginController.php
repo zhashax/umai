@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,6 +37,10 @@ class LoginController extends Controller
         return 'home';  // member dashboard path
       }
     }
+    public function logout(Request $request) {
+      Auth::logout();
+      return redirect('/login');
+  }
     
     /**
      * Create a new controller instance.

@@ -152,7 +152,7 @@
 
                             <li>
                                 <a href="{{ route('user.students') }}" class=" waves-effect">
-                                    <i class="ri-Calendar-2-line"></i>
+                                    <i class="fas fa-graduation-cap	"></i>
                                     <span>Students</span>
                                 </a>
                             </li>

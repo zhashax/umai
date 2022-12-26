@@ -203,11 +203,22 @@
                         </div>
 
                         <div class="dropdown d-inline-block user-dropdown">
-                            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
                                 <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-1.jpg') }}"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()->name }}</span>
+                                <span class="d-none d-xl-inline-block ms-1">@if (Route::has('login'))
+                                    <div class="top-right links">
+                                        @auth
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary">Logout</button>
+                                        </form>
+                                        @else
+                                            <a href="{{ route('login') }}">Login</a>
+                                            <a href="{{ route('register') }}">Register</a>
+                                        @endauth
+                                    </div>
+                                @endif</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
