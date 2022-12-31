@@ -1,6 +1,7 @@
 {
     "private": true,
     "scripts": {
+        "type": "module",
         "dev": "vite",
         "build": "vite build"
     },
@@ -13,5 +14,10 @@
         "postcss": "^8.1.14",
         "sass": "^1.32.11",
         "vite": "^3.0.0"
+    },
+    "dependencies": {
+        "laravel-mix": "^6.0.49",
+        "live-server": "^1.2.2",
+        "node": "^19.3.0"
     }
 }

@@ -5,6 +5,8 @@ use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
+
+
 class StudentController extends Controller
 {
     public function index(){
@@ -25,6 +27,14 @@ class StudentController extends Controller
         $student->comment=$request->comment;
         $student->save();
         return redirect()->route('user.students')->with('status','Студент успешно добавлен!');
+
+    }
+    public function delete_student($id){
+        $student_delete = Student::where('id', $id)->delete();
+        if($student_delete){
+            return back()->with('success!','deleted');
+        }
+        return back()->with('error','Post not deleted');
 
     }
 }

@@ -87,7 +87,7 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-1.jpg')}}"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()?Auth::user()->name :Auth::guest()."guest" }}</span>
+                                <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()?Auth::user()->name : "guest" }}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -122,7 +122,7 @@
                             <img src="{{ asset('assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-md rounded-circle">
                         </div>
                         <div class="mt-3">
-                            <h4 class="font-size-16 mb-1">{{ Auth::user()? Auth::user()->name:Auth::guest() }}</h4>
+                            <h4 class="font-size-16 mb-1">{{ Auth::user()? Auth::user()->name:"guest" }}</h4>
                             <span class="text-muted"><i class="ri-record-circle-line align-middle font-size-14 text-success"></i> Online</span>
                         </div>
                     </div>
@@ -327,6 +327,7 @@
                                                <td>{{ $student['sex'] }}</td> 
                                                <td>{{ $student['mobile'] }}</td> 
                                                <td>{{ $student['class'] }}</td> 
+                                               <td><a href="{{ url('student.delete/'.$student->id) }}"><i class="fa fa-trash"></i></a></td>
                                              </tr>  
                                              @endforeach   
                                         

@@ -31,8 +31,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('user.home');
 Route::get('/students',[StudentController::class,'index'])->name('user.students');
 
 Route::get('/add_student',[StudentController::class,'index'])->name('user.widgets.add_student');  
-Route::post('store-student-form',[StudentController::class,'store_student']);
-
+Route::post('store-student-form',[StudentController::class,'store_student']);//добавляем с помощью контроллера пост
+Route::get('student.delete/{id}', [StudentController::class,'delete_student']);// удаляем студента с помощью контроллера
 Route::group(['middleware' => ['admin']], function () {
   Route::get('dashboard', [HomeController::class, 'adminView'])->name('admin.view');
 });
