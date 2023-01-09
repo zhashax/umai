@@ -25,6 +25,9 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function records(){
+        return $this->hasMany('App\Record','id');
+    }
     public function isAdmin()
     {
         if(Auth::user()->is_admin == true){

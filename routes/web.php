@@ -28,11 +28,22 @@ Auth::routes();
 Route::get('logout', [LoginController::class,'logout'])->name('logout');
 
 Route::get('/home', [HomeController::class, 'index'])->name('user.home');
-Route::get('/students',[StudentController::class,'index'])->name('user.students');
+
 
 Route::get('/add_student',[StudentController::class,'index'])->name('user.widgets.add_student');  
 Route::post('store-student-form',[StudentController::class,'store_student']);//добавляем с помощью контроллера пост
 Route::get('student.delete/{id}', [StudentController::class,'delete_student']);// удаляем студента с помощью контроллера
+
+
+Route::get('/add_record',[RecordController::class,'index'])->name('user.widgets.add_student');  
+Route::post('store-record-form',[RecordController::class,'store_record']);//добавляем с помощью контроллера пост
+Route::get('record.delete/{id}', [RecordController::class,'delete_record']);// удаляем студента с помощью контроллера
+
+Route::group(['middleware' => ['user']],function(){
+  Route::get('/students',[StudentController::class,'index'])->name('user.students');
+  Route::get('records', [RecordController::class, 'recordView'])->name('user.records');
+});
 Route::group(['middleware' => ['admin']], function () {
   Route::get('dashboard', [HomeController::class, 'adminView'])->name('admin.view');
+  
 });

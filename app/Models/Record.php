@@ -9,14 +9,10 @@ class Record extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'fullname',
-        'address',
-        'email',
-        'sex',
-        'mobile',
-        'class',
-        'school_name',
-        'discount',
-        'comment'
+        'user_id','title'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

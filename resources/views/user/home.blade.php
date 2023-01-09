@@ -267,6 +267,12 @@
                                     <span>Students</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('user.records') }}" class=" waves-effect">
+                                    <i class="far fa-edit"></i>
+                                    <span>Records</span>
+                                </a>
+                            </li>
                 
                                              {{-- <li class="menu-title">Pages</li> --}}
 
