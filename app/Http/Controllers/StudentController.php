@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class StudentController extends Controller
 {
     public function index(){
-        $students = Student::all();
+        $students = User::find(1)->students;
         $user = User::all();
         return view('admin.students',['user'=>$user],['students'=>$students]);
     }

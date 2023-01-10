@@ -27,10 +27,13 @@ class User extends Authenticatable
     ];
 
     public function records(){
-        return $this->hasMany('App\Record','id');
+        return $this->hasMany('App\Record');
     }
-    public function user(){
-        return $this->hasMany(Record::class);
+    public function tasks(){
+        return $this->hasMany('App\Tasks');
+    }
+    public function students(){
+        return $this->hasMany('App\Models\Student','user_id');
     }
     public function isAdmin()
     {

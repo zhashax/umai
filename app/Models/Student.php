@@ -20,5 +20,8 @@ class Student extends Model
         'discount',
         'comment'
     ];
+    public function user(){
+        return $this->belongsTo('App\Models\User','id','user_id');
+    }
 
 }

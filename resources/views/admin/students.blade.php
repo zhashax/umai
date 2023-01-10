@@ -339,7 +339,9 @@
         
         
                                             <tbody>
+    
                                              @foreach ($students as $student)
+                                             @if (auth()->user()->id  == $student->user_id)
                                              <tr>
                                                <td>{{ $student['fullname'] }}</td> 
                                                <td>{{ $student['address'] }}</td> 
@@ -349,8 +351,9 @@
                                                <td>{{ $student['class'] }}</td> 
                                                <td><a href="{{ url('student.delete/'.$student->id) }}"><i class="fa fa-trash"></i></a></td>
                                              </tr>  
-                                             @endforeach   
-                                        
+                                              
+                                             @endif
+                                             @endforeach  
                                             </tbody>
                                         </table>
         
