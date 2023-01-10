@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -15,8 +14,10 @@ class StudentController extends Controller
         return view('admin.students',['user'=>$user],['students'=>$students]);
     }
     public function store_student(Request $request){
+    
         $student = new Student;
         $student->fullname=$request->fullname;
+        $student->user_id =$request->user_id;
         $student->address=$request->address;
         $student->email=$request->email;
         $student->sex=$request->sex;

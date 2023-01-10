@@ -22,7 +22,6 @@
     </head>
     <body class="antialiased">
     
-        
     
 
         {{-- {!! Form::select('user', $users, null, ['class' => 'form-control']) !!} --}}

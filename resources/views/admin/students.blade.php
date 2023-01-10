@@ -225,6 +225,8 @@
                                                           <input  type="text" id="fullname" name="fullname" class="form-control" required="">
                                                         </div>
                                                     </div>
+                                                    
+                                                    <input type="hidden" id="user_id" value="{{ $user[0]->id }}" name="user_id" class="form-cotrol">
                                                     <!-- end row -->
                                                     <div class="row mb-3">
                                                       <label for="address" class="col-sm-2 col-form-label">address</label>

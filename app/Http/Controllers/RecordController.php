@@ -11,12 +11,12 @@ class RecordController extends Controller
 
     public function recordView()
     {
-        $records = Record::all();
+        $records = Record::with('user');
         $user = User::all();
-        return view('user.records',['user' => $user],['records'=>$records]);
+        return view('user.records',['user' => $user],compact('records'));
     }
     public function index(){
-        $records = Record::all();
+        $records = Record::with('user')->orderBy('name');
         $user = User::all();
         return view('user.records',['user'=>$user],['records'=>$records]);
     }

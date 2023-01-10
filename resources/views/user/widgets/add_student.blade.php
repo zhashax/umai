@@ -32,11 +32,15 @@
 
                             {{-- start row --}}
                               <div class="row mb-3">
-                                <label for="fullname" class="col-sm-2 col-form-label">fio</label>
+                                <label for="fullname" class="col-sm-2 col-form-label">fio </label>
                                   <div class="col-sm-10">
                                     <input  type="text" id="fullname" name="fullname" class="form-control" required="">
                                   </div>
                               </div>
+                              
+
+                              
+                              
                               <!-- end row -->
                               <div class="row mb-3">
                                 <label for="address" class="col-sm-2 col-form-label">address</label>
